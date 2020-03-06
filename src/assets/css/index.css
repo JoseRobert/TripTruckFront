@@ -1,0 +1,182 @@
+/*  index.css */
+
+@charset "UTF-8";
+
+/* @import url('Fonts: https://fonts.googleapis.com/css?family=???'); */
+/* @import url(theme_1.css); */
+
+:root {
+    /*  Main  */
+    --background-main: rgb(59, 48, 48) ;
+    --background-content: rgb(99, 82, 82) ;
+    --color-main: #333333;
+    --border-radius: 0.13rem;
+    /* --border-main: 
+    --border-content:  */
+    
+    /*  Menu NavBar */
+    --background-menu: #BD0219;
+    --font-color: #cbd5db;
+    --brand-color: rgb(121, 136, 119) ;
+    /* #5f788a */
+    /* #485A75 */ 
+    /*  SubMenu Nav */
+    
+    --colorTitle: rgb(255, 255, 255);
+
+    /*  Buttons  */
+    --btnBackground: rgb(51, 37, 37);
+    --btnProp: rgb(233, 231, 231);
+    --btnBackgroundHover: rgb(0, 0, 0);
+    --btnPropHover: white;
+    --btnPropDisabled: rgb(92, 90, 90);
+
+    /*  Select Filters-Sort  */
+    --selBackground: rgb(180, 175, 175);
+    --selColor: rgb(31, 27, 18);
+
+
+    /*  Inputs Form */
+    --formBackground: rgba(141, 143, 145);
+    --formLabelColor: rgb(51, 37, 37);
+ 
+    --inputBackground: plum;
+    --inputBackground: rgb(218, 202, 202);
+
+    --inputColor: plum;
+    --inputColor: rgb(240, 240, 240);
+
+    --inputColorFocus: rgb(200, 228, 198);
+    --inputColorFocus: plum;
+
+    --inputColorFocus: black;
+
+    --inputColorDisabled: lightgrey;
+
+    --optionBackground: black;
+    --optionColor: white;
+
+    /*  Owner  */
+    --ownerColor: lightblue;
+    --ownerColorHover: white;
+}
+
+html {
+    font-size: 16px;
+}
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    font-weight: normal;
+    background-color: var(--background-main);
+    color: var(--color-main);
+    margin-top: 3.5rem;
+    line-height: 1;
+    /* background-image: url("../../media/Rhombus_Pattern.jpg");   
+    background-size: auto; */
+    min-width: 360px;
+}
+
+
+body {
+    background-color: rgba(120, 201, 157);
+}
+
+
+.titleProp {
+    font-size: 1.2rem;
+    margin: 0.3rem;
+    color: var(--colorTitle);
+    text-align: left;
+}  
+.fontBold {
+    font-weight: 500;
+}
+.rounded {
+    border-radius: var(--border-radius) !important;     
+}
+
+
+/* Botones */
+.btnProp {
+    background-color: var(--btnBackground);
+    color: var(--btnProp);
+    margin: 1px;
+}
+.btnProp:hover {
+    background-color: var(--btnBackgroundHover);
+    color: var(--btnPropHover);
+    /* font-size: 1.01rem; */
+}
+.btnProp:disabled {
+    color: var(--btnPropDisabled);
+}
+.btnProp:focus {
+    /* color: green; */
+}
+.btnProp:selection {
+    /* color: blue; */
+}
+#idLimiter {
+    padding: .15rem;        
+}
+/* End Botones */
+/* -------- -- Media Queries --------*/
+@media (max-width: 575px) {   /* xs */
+    html{
+        font-size: 13px;
+    }
+    body {
+        background-color: comflowerblue;
+    
+    }
+    
+    }  /*  End xs */
+    
+    /*  Small devices (landscape phones, 576px and up) */
+    @media (min-width: 576px) { /* sm */
+            
+    html {
+        font-size: 14px; 
+    }
+    body {
+        /* background-color: khaki;   */
+    
+    }
+    }  /*  End sm */
+    
+     /* Medium devices (tablets, 768px and up) */
+    @media (min-width: 768px) { /* md */
+    html {
+        font-size: 15px; 
+    }
+    body {
+        /* background-color: salmon;   */
+    
+    }
+    
+    }  /*  End md */
+    
+    /* Large devices (desktops, 992px and up) */
+    @media (min-width: 992px) {  /* lg */
+    
+    html {
+        font-size: 16px; 
+    }
+    body {
+        /* background-color: cadetblue;   */
+        
+    }
+    
+    }  /*  End lg */
+    
+    /* Extra large devices (large desktops, 1200px and up) */
+    @media (min-width: 1200px) {  /* xl */
+    html {
+        font-size: 16px; 
+    }
+    body {
+        /* background-color: silver;   */
+    
+    }
+    
+    }   /*  End xl */
