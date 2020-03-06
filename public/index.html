@@ -16,8 +16,9 @@
     <script>
 
       var path = window.location.pathname;
-      console.log('path', path) ;
-      // console.dir(window.document);
+      console.log('path', path);
+      var APP_TITLE = process.env.VUE_APP_TITLE;
+      console.dir(APP_TITLE);
       console.log('title = ', process.env.VUE_APP_TITLE);
       console.log('secret = ', process.env.VUE_APP_SECRET);
       console.log('node = ', process.env.VUE_APP_NODE_ENV);
