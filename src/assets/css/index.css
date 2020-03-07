@@ -76,9 +76,11 @@ body {
     /* background-image: url("../../media/Rhombus_Pattern.jpg");   
     background-size: auto; */
     min-width: 360px;
+    border-radius: var(--border-radius) !important; 
 }
 
-.titleProp {
+
+.titleProps {
     font-size: 1.1rem;
     margin: 0.3rem;
     color: var(--colorTitle);
@@ -90,14 +92,15 @@ body {
 .rounded {
     border-radius: var(--border-radius) !important;     
 }
-.menuLocation + div {
+
+.router-link-active + div {
     display: block;
     width: 100%;
     height: 0.10rem;
     /* border-bottom: 2px solid black; */
     border-bottom-width: 1.3px;
     border-bottom-style: solid;
-    border-bottom-color: var(--font-color);
+    border-bottom-color: white;
     /* color: inherit; */
 
 }
@@ -129,6 +132,58 @@ body {
     padding: .15rem;        
 }
 /* End Botones */
+/* ----------- component -------------------------- */
+/*  Button */
+.btn_1  {
+    background-color: rgb(181, 151, 221);
+    color: black;
+    border: 0.1rem 0.3rem;
+    padding: 0.1rem 0.3rem;
+
+}
+/* .btn_1:active {
+	transform: scale(.95);
+} */
+
+/* Table */
+table {
+/* width: 400px; */
+/* height: 600px; */
+background-color: transparent;
+border-spacing: 3px;   /*  espaciado entre  celdas */
+
+/* empty-cells: show; */
+}
+thead {
+background-color: inherit;
+}
+thead tr {
+    cursor: pointer;
+    border: 1px solid #333;
+    font-weight: 400;
+}
+th:hover {
+   color: white; 
+}
+tbody tr {
+    height: 1rem !important;
+    vertical-align: center !important; 
+
+}
+thead tr th, tbody tr td {
+   /* align-self: center !important; */
+   vertical-align: center;
+}
+/* table:nth-child(odd) {
+background-color: #E0DAE9;
+}
+table:nth-child(even) {
+background-color: #DBE9E7;
+} */
+
+/* -------------------------------------- */
+
+
 /* -------- -- Media Queries --------*/
 @media (max-width: 575px) {   /* xs */
     html{

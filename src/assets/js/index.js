@@ -2,7 +2,7 @@
 
 console.log('index.js');
 
-var path = window.location.pathname;   // HTML name current
+// var path = window.location.pathname;   // HTML name current
 
 function menuLocation(){
     console.log('path = ', path);

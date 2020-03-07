@@ -2,7 +2,8 @@
 
 <template>
     <div class=''>
-        <div class='titleProp'>Customers</div>
+        <div class='titleProps'>Customers</div>
+        <button class='btn btn-sm btn_1' @click="newCustomer">New</button>
         <table class='table table-sm table-bordered table-hover'>
             <thead class='rounded-top'>
                 <tr>
@@ -20,7 +21,7 @@
                     <td> {{ customer.name }} </td>
                     <td> {{ customer.address.street+' '+customer.address.city+', '+customer.address.state }} </td>
                     <td> {{ customer.phone }} </td>
-                    <td> <button class='btn btn-sm'>Edit</button> <button class='btn btn-sm'>Delete</button></td>
+                    <td> <button class='btn btn-sm btn_1'>Edit</button> <button class='btn btn-sm btn_1'>Delete</button></td>
                 </tr>
             </tbody>
         </table>
@@ -44,7 +45,12 @@ export default {
         }
 
     },
-    methods: {},
+    methods: {
+        newCustomer: function(){
+            console.log('newCustomer()');
+            this.$router.push('/detailCustomer');
+        }
+    },
     created: function(){
         console.log('customers.created()');
         this.$store.dispatch('getCustomers');
@@ -60,5 +66,4 @@ export default {
 </script>
 
 <style scope>
-
 </style>

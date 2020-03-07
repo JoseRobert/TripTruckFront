@@ -1,11 +1,11 @@
 //  Users.vue
 <template>
- <div class='titleProp'>Users</div>  
+ <div class='titleProps'>Users</div>  
 </template>
 
 <script>
 export default {
-
+    name: 'Users'
 }
 </script>
 

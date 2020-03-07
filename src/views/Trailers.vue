@@ -1,11 +1,11 @@
 //  Trailers.vue
 <template>
- <div class='titleProp'>Trailers</div>  
+ <div class='titleProps'>Trailers</div>  
 </template>
 
 <script>
 export default {
-
+    name: 'Trailers'
 }
 </script>
 

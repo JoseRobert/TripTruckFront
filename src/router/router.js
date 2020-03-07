@@ -11,6 +11,10 @@ import Users from '../views/Users';
 import Trailers from '../views/Trailers';
 import Trucks from '../views/Trucks';
 import Login from '../views/Login';
+import Tables from '../views/Tables';
+import detailCustomer from '../components/detailCustomer';
+
+
 
 Vue.use(VueRouter)
 
@@ -49,7 +53,17 @@ const routes = [
     path: '/customers',
     name: 'Customers',
     component: Customers
-  }
+  },
+  {
+    path: '/tables',
+    name: 'Tables',
+    component: Tables
+  },
+  {
+    path: '/detailCustomer',
+    name: 'detailCustomer',
+    component: detailCustomer
+  }  
 
 ]
 

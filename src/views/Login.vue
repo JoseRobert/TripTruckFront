@@ -1,7 +1,7 @@
 //  Login.vue
 
 <template>
- <div class='title'>Login</div>  
+ <div class='titleProp'>Login</div>  
 </template>
 
 <script>

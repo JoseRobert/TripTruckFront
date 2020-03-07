@@ -19,3 +19,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Aplicativo
+/src/copias
+
+# The file containing environment variables 
+#.env
