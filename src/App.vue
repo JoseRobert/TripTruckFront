@@ -1,8 +1,10 @@
 <template>
-  <div id="app" class='container'>
-    <nav id='menu' class="navbar navbar-expand-sm navbar-light bg-light">  
+  <div id="app" class='container-fluid'>
+    <nav id='Menu' class="navbar navbar-expand-sm navbar-light bg-light">  
+
       <router-link class="navbar-brand" to="/">Phoenix</router-link>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -11,12 +13,11 @@
               <router-link class="nav-link" to="/trips">Trips</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/tables">Tables</router-link>
+              <router-link class="nav-link" @click="submenu" to="">Tables</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/customers">Customers</router-link>
+              <router-link class="nav-link active" to="/login"></router-link>
             </li>
-            <router-link class="nav-link active" to="/login"></router-link>
           </ul>
       </div>
     </nav> 
@@ -46,28 +47,63 @@
     </transition>
   </div>
 </template>
+<script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  /* background-color: rgba(163, 206, 214, 0.459); */
-  color: #2c3e50;
+export default {
+  name: 'Vue',
+  methods: {
+    submenu: function(){
+      console.log('subMenu');
+
+    }
+
+  },
+  created: function(){
+      console.log('vue.created()');
+
+
+  }      
+  
+}
+</script>
+<style scope>
+:root {
+  --padding: 0.15rem;
+  --bgMenus: rgb(129, 188, 196);
+} 
+
+#Menu {
+  background-color: var(--bgMenus) !important;
+  padding: var(--padding);
+}
+.navbar-brand {
+  padding: var(--padding);
+}
+.nav-item {
+  padding: var(--padding);
+
+}
+a:hover {
+  color: white;
+}
+.nav-link {
+  padding: var(--padding);  
 }
 
-#nav {
-  padding: 10px;
-  background-color: rgba(182, 178, 178, 0.5);
+#subMenu {
+  background-color:  var(--bgMenus) !important;
+  padding: var(--padding);
+  border-top: 1px solid white;
 }
 
-#nav a {
-  font-weight: 400;
-  color: #2c3e50;
+#subMenu ul {
+  /* background-color: rgb(103, 171, 180); */
+}
+#subMenu a {
+  color: black;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+#subMenu a.router-link-exact-active {
+  color: #222e28;
 }
 </style>

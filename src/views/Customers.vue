@@ -2,7 +2,7 @@
 
 <template>
     <div class=''>
-        <div class='title'>Customers</div>
+        <div class='titleProp'>Customers</div>
         <table class='table table-sm table-bordered table-hover'>
             <thead class='rounded-top'>
                 <tr>

@@ -1,12 +1,15 @@
 // main.js
 
 import Vue from 'vue'
-    import Vuex from 'vuex' // probando
+    // import Vuex from 'vuex' // probando
 
 import App from './App.vue'
 import router from './router/router.js'
 import store from './store/store.js'
 // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+require('@/assets/js/index.js');
+require('@/assets/css/index.css');
 
 Vue.config.productionTip = false
 // Install BootstrapVue
