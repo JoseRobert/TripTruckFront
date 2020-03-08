@@ -33,12 +33,12 @@
             </div>
         </div>
         <div class="form-row">
-        <div class="col form-group">
-            <label for="phone" class="formControlLabel">Mobile</label>
-            <input type="tel" name='phone' class="form-control form-control-sm" id="phone" placeholder="Mobile"
-                oninput="evalInput(this)" pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$">
-            <small id="mobileError" class="form-text text-muted">###-###-####</small>
-        </div>
+            <div class="col form-group">
+                <label for="phone" class="formControlLabel">Mobile</label>
+                <input type="tel" name='phone' class="form-control form-control-sm" id="phone" placeholder="Mobile"
+                    oninput="evalInput(this)" pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$">
+                <small id="mobileError" class="form-text text-muted">###-###-####</small>
+            </div>
         </div>
         <div class="form-row row">
             <div class="col-6 form-group">
@@ -70,13 +70,23 @@
 
 <script>
 
-// import form 
-
+require('@/assets/js/form.js');
 
 export default {
-    name: 'detailUser'
+    name: 'detailUser',
+    created: function(){
+        console.log('form.User.created()');
+        this.$store.dispatch('getUsers');
+
+    },
+    mounted: function(){
+        console.log('form.User.mounted()')
+    },       
+    destroyed: function(){
+        console.log('form.User.destroyed()');
+    }
 }
 </script>
 
-<style src="@/assets/css/form.css">
+<style scoped src="@/assets/css/form.css">
 </style>

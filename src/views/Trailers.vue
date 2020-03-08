@@ -1,6 +1,8 @@
 //  Trailers.vue
 <template>
- <div class='titleProps'>Trailers</div>  
+<div class="container">
+    <div class='titleProps'>Trailers</div>  
+</div>
 </template>
 
 <script>
@@ -9,6 +11,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

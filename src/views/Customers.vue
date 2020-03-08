@@ -1,9 +1,11 @@
 // Customers.vue    
 
 <template>
-    <div class=''>
+    <div class='container'>
         <div class='titleProps'>Customers</div>
+
         <button class='btn btn-sm btn_1' @click="newCustomer">New</button>
+        
         <table class='table table-sm table-bordered table-hover'>
             <thead class='rounded-top'>
                 <tr>
@@ -65,5 +67,5 @@ export default {
 // Actions = logica de negocio
 </script>
 
-<style scope>
+<style scoped>
 </style>

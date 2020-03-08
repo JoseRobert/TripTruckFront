@@ -29,6 +29,21 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+#subMenu {
+    background-color:  var(--bgMenus) !important;
+    padding: var(--padding);
+    border-top: 1px solid white;
+  }
+  
+  #subMenu ul {
+    /* background-color: rgb(103, 171, 180); */
+  }
+  #subMenu a {
+    color: black;
+  }
+  
+  #subMenu a.router-link-exact-active {
+    color: #222e28;
+  }
 </style>

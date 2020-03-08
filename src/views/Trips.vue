@@ -1,14 +1,18 @@
 //  Trips.vue
 <template>
- <div class='titleProps'>Trips</div>  
+<div class="container">
+    <div class='titleProps'>Trips</div>  
+    
+</div>
 </template>
 
 <script>
 export default {
+    name: 'Trips'
 
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

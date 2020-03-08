@@ -1,9 +1,11 @@
 //  Users.vue
 <template>
- 
     <div class='container'>
         <div class='titleProps'>Users</div> 
-        <button class='btn btn-sm btn_1' @click="newUser">New</button>
+        <div class='d-flex align-items-center justify-content-between'>
+            <button class='btn btn-sm btn_1' @click="newUser">New</button>
+            <div>Find component</div>
+        </div>
         <table class='table table-sm table-bordered table-hover'>
             <thead class='rounded-top'>
                 <tr>
@@ -13,7 +15,6 @@
                     <th>Role</th>
                     <th>Phone</th>
                     <th>Actions</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -23,13 +24,12 @@
                     <td> {{ user.name }} </td>
                     <td> {{ user.role }} </td>
                     <td> {{ user.mobile }} </td>
-                    <td> <button class='btn btn-sm btn_1'>Edit</button> <button class='btn btn-sm btn_1'>Delete</button></td>
+                    <td class='d-flex '><button class='btn btn-sm btn_1' @click='editUser'>Edit</button> <button class='btn btn-sm btn_1' @click='deleteUser'>Delete</button></td>
                 </tr>
             </tbody>
         </table>
+
     </div>
-
-
 </template>
 
 <script>
@@ -40,15 +40,19 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
     name: 'Users',
     computed: {
-        // console.log('computed{}');
         ...mapState(['users']),
-        ...mapActions(['getUsers'])
-
+        ...mapActions(['getUsers']),
     },
     methods: {
         newUser: function(){
             console.log('newUser()');
             this.$router.push('/detailUser');
+        },
+        editUser: function(){
+            console.log('editUser()');
+        },
+        deleteUser: function(){
+            console.log('deleteUser()');
         }
     },
     created: function(){
@@ -62,6 +66,5 @@ export default {
 }
 </script>
 
-<style scope src='@/assets/css/table.css'>
-
+<style scoped src='@/assets/css/table.css'>
 </style>

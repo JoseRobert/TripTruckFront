@@ -19,7 +19,7 @@ table {
         font-weight: 400;
     }
     th:hover {
-       color: white; 
+       color: green; 
     }
     tbody tr {
         height: 1rem !important;

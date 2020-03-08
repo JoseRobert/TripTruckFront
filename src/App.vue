@@ -24,8 +24,6 @@
           </ul>
       </div>
     </nav> 
-
-
     <transition name=''>
       <router-view/>
     </transition>
@@ -33,7 +31,7 @@
 </template>
 
 <script>
-
+// console.log('App.vue');
 export default {
   name: 'Vue',
   methods: {
@@ -46,7 +44,7 @@ export default {
   },
   created(){
       console.log('template.created()');
-      this.tables();
+      // this.tables();
 
   },
   mounted: function(){
@@ -57,15 +55,16 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 :root {
     --padding: 0.15rem;
-    --bgMenus: rgb(195, 221, 224);
+    --bgMenus: rgb(121, 162, 167);
   } 
   
   #Menu {
     background-color: var(--bgMenus) !important;
     padding: var(--padding);
+    height: 2rem;
   }
   .navbar-brand {
     padding: var(--padding);
@@ -81,20 +80,4 @@ export default {
     padding: var(--padding);  
   }
   
-  #subMenu {
-    background-color:  var(--bgMenus) !important;
-    padding: var(--padding);
-    border-top: 1px solid white;
-  }
-  
-  #subMenu ul {
-    /* background-color: rgb(103, 171, 180); */
-  }
-  #subMenu a {
-    color: black;
-  }
-  
-  #subMenu a.router-link-exact-active {
-    color: #222e28;
-  }
 </style>
