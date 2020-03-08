@@ -19,6 +19,11 @@ export default new Vuex.Store({
     customers: function(state, data){
       console.log('mutations.customers()');
       state.customers = data;
+    },
+    users: function(state, data){
+      console.log('mutations.users()');
+      state.users = data;
+
     }
   },
   actions: {
@@ -29,7 +34,14 @@ export default new Vuex.Store({
       let customers = await data.json();
       commit('customers', customers);
       // commit('customers', {name: 'cliente01'});
-    }
+    },
+    getUsers: async function({ commit }){
+      console.log('actions.getUsers()')
+      let data = await fetch('http://localhost:8000/all_users/');
+      let users = await data.json();
+      commit('users', users);
+      // commit('customers', {name: 'cliente01'});
+    }    
 
   },
   modules: {

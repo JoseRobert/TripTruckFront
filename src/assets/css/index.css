@@ -75,7 +75,7 @@ body {
     line-height: 1;
     /* background-image: url("../../media/Rhombus_Pattern.jpg");   
     background-size: auto; */
-    min-width: 360px;
+    /* min-width: 360px; */
     border-radius: var(--border-radius) !important; 
 }
 
@@ -132,6 +132,10 @@ body {
     padding: .15rem;        
 }
 /* End Botones */
+
+
+
+
 /* ----------- component -------------------------- */
 /*  Button */
 .btn_1  {
@@ -182,6 +186,8 @@ background-color: #DBE9E7;
 } */
 
 /* -------------------------------------- */
+
+
 
 
 /* -------- -- Media Queries --------*/

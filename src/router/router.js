@@ -13,6 +13,7 @@ import Trucks from '../views/Trucks';
 import Login from '../views/Login';
 import Tables from '../views/Tables';
 import detailCustomer from '../components/detailCustomer';
+import detailUser from '../components/detailUser';
 
 
 
@@ -63,7 +64,13 @@ const routes = [
     path: '/detailCustomer',
     name: 'detailCustomer',
     component: detailCustomer
+  },
+  {
+    path: '/detailUser',
+    name: 'detailUser',
+    component: detailUser
   }  
+
 
 ]
 
