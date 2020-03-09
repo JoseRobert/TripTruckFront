@@ -6,7 +6,7 @@ table {
     /* width: 400px; */
     /* height: 600px; */
     background-color: transparent;
-    border-spacing: 3px;   /*  espaciado entre  celdas */
+    border-spacing: 0.214rem;   /*  espaciado entre  celdas */
     
     /* empty-cells: show; */
     }

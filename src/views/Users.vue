@@ -1,6 +1,6 @@
 //  Users.vue
 <template>
-    <div class='container'>
+    <div class='container ctn_1'>
         <div class='titleProps'>Users</div> 
         <div class='d-flex align-items-center justify-content-between'>
             <button class='btn btn-sm btn_1' @click="newUser">New</button>
@@ -14,17 +14,20 @@
                     <th>Full Name</th>
                     <th>Role</th>
                     <th>Phone</th>
-                    <th>Actions</th>
+                    <th class='text-center'>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(user, index) in users" :key='index'>
+                <tr class='' v-for="(user, index) in users" :key='index'>
                     <td> {{ index+1 }} </td>
                     <td> {{ user.username }} </td>
                     <td> {{ user.name }} </td>
                     <td> {{ user.role }} </td>
                     <td> {{ user.mobile }} </td>
-                    <td class='d-flex '><button class='btn btn-sm btn_1' @click='editUser'>Edit</button> <button class='btn btn-sm btn_1' @click='deleteUser'>Delete</button></td>
+                    <td class='d-flex'>
+                        <button class='btn btn-sm btn_1' @click='editUser'>Edit</button>
+                        <button class='btn btn-sm btn_1' @click='deleteUser'>Delete</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

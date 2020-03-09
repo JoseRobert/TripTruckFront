@@ -5,7 +5,7 @@
         <div class='titleProps'>Customers</div>
 
         <button class='btn btn-sm btn_1' @click="newCustomer">New</button>
-        
+
         <table class='table table-sm table-bordered table-hover'>
             <thead class='rounded-top'>
                 <tr>
@@ -39,13 +39,8 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 export default {
     name: 'Customers',
     computed: {
-        // console.log('computed{}');
         ...mapState(['customers']),
         ...mapActions(['getCustomers']),
-        computo1: function(){
-
-        }
-
     },
     methods: {
         newCustomer: function(){

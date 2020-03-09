@@ -20,8 +20,10 @@ yarn-error.log*
 *.sln
 *.sw?
 
-# Aplicativo
-/src/copias
-
 # The file containing environment variables 
 #.env
+
+
+# Aplicativo
+/src/copias
+/public/fontawesome

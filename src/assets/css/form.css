@@ -8,7 +8,7 @@ input {
 	outline: ;
 }*/
 .formBase {
-background-color: lightgray;
+	background-color: lightgray;
 }
 /*  Boostrap */
 .form-group > label {
@@ -74,9 +74,9 @@ label {
 	/*border: 0.063rem solid transparent;*/
 }
 
-input[type="number"] {
-	/* direction: rtl; */
-}
+/* input[type="number"] {
+	direction: rtl;
+} */
 input[type="checkbox"] {
 	background-color: #fff;
 }
@@ -87,8 +87,6 @@ input:focus {
 
 }
 input:focus:invalid {
-	/*border: 1px solid red;*/
-	/*outline: 0;*/
 	box-shadow: none;
 	outline: none;
 	text-decoration: none;
@@ -96,7 +94,6 @@ input:focus:invalid {
 input:valid, textarea:valid {
 	color: inherit;
 	color: black;
-
 }
 input:invalid, textarea:invalid {
 	box-shadow: none;
@@ -104,6 +101,6 @@ input:invalid, textarea:invalid {
 	text-decoration: none;
 	/* color: dimgray; */
 }
-input:required:invalid {
-	/* border-color: red !important; */
-}
+/* input:required:invalid {
+	border-color: red !important;
+} */

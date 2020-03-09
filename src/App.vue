@@ -1,6 +1,6 @@
 <template>
   <div id="app" class='container-fluid'>
-    <nav id='Menu' class="navbar navbar-expand-sm navbar-light bg-light">  
+    <nav id='Menu' class="navbar navbar-expand-sm navbar-light bg-light justify-content-center">  
 
       <router-link class="navbar-brand" to="/">Phoenix</router-link>
 
@@ -18,8 +18,8 @@
                <div></div>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/login">Login</router-link>
-              <div></div>
+              <router-link class="nav-link" to="/login"><i class="icon_user far fa-user"></i></router-link>
+              <!-- <div></div> -->
             </li>
           </ul>
       </div>
