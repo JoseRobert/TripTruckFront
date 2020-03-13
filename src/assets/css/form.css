@@ -9,6 +9,7 @@ input {
 }*/
 .formBase {
 	background-color: lightgray;
+	background-color: var(--formBackground);
 }
 /*  Boostrap */
 .form-group > label {
@@ -103,4 +104,18 @@ input:invalid, textarea:invalid {
 }
 /* input:required:invalid {
 	border-color: red !important;
-} */
+} */ 
+.msg_form {
+	background-color: red;
+}
+.btns_crud {
+	background-color: var(--formBackground);
+	margin: 5px 0;
+}
+.seePw {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+	width: 25px;
+	height: 25px;
+}

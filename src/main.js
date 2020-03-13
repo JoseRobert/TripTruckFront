@@ -11,6 +11,10 @@ import store from './store/store.js'
 require('@/assets/js/index.js');
 require('@/assets/css/index.css');
 
+//import { evalInput, evalForm, test  } from '@/assets/js/form';
+// console.log('---------');
+
+
 Vue.config.productionTip = false
 // Install BootstrapVue
 // Vue.use(BootstrapVue)

@@ -1,8 +1,9 @@
 //  form.js
+console.log('form.js cargado');
 
 'use strict';
 
-function evalInput(obj){
+export function evalInput(obj){
 	// console.log('evalua(name= '+obj.name+'){...}');
 	//let ele = document.querySelector("#"+e.target.id);	// obj = objeto evento es pasado como argumento
 	let idForm = obj.form.id;								// Id del formulario padre
@@ -65,7 +66,7 @@ function evalExpReg(sPatron, sValor){
 		return true;					
 }
 
-function evalForm(idForm){
+export function evalForm(idForm){
 	if( !idForm) return false;
 	var oForm=document.getElementById(idForm);
 	if( !oForm ){ console.log('Form (id='+idForm+'), not found.'); return false; };
@@ -76,7 +77,7 @@ function evalForm(idForm){
 	return true;			
 }
 
-function seePassword(self, keys){
+export function seePassword(self, keys){
 	// console.log('seePassword()');
 	// if( arguments.length != 2) console.log('seePassword() -> Arguments no valid.');
 	if( self == null || keys == null ) return false;
@@ -88,3 +89,14 @@ function seePassword(self, keys){
 		if (obj) obj.setAttribute('type',text);		// Modificando atributo
     }  
 }
+export function test(){
+	console.log('func.test....export....');
+}
+
+// export default {
+// 	evalInput,
+// 	evalForm,
+// 	seePassword,
+// 	test
+
+// }

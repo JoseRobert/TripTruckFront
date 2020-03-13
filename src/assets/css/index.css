@@ -35,16 +35,17 @@
     --selBackground: rgb(180, 175, 175);
     --selColor: rgb(31, 27, 18);
 
+    /*  Form */
+    --formBackground: rgb(163, 184, 204);
 
     /*  Inputs Form */
-    --formBackground: rgba(141, 143, 145);
+
     --formLabelColor: rgb(51, 37, 37);
  
     --inputBackground: plum;
     --inputBackground: rgb(218, 202, 202);
 
-    --inputColor: plum;
-    --inputColor: rgb(240, 240, 240);
+     --inputColor: rgb(240, 240, 240);
 
     --inputColorFocus: rgb(200, 228, 198);
     --inputColorFocus: plum;
@@ -75,6 +76,9 @@ body {
     background-size: auto; */
     /* min-width: 360px; */
     border-radius: var(--border-radius) !important; 
+}
+div form {
+    border-radius: var(--border-radius) !important;     
 }
 /* Container de Componentes */
 .ctn_1 {

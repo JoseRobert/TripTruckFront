@@ -1,7 +1,7 @@
 // store.js   
 
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { mapActions } from 'vuex'
 
 Vue.use(Vuex)
 
@@ -37,7 +37,7 @@ export default new Vuex.Store({
     }      
   },
   actions: {
-
+      // { commit, dispatch } = objetos contexto
     getCustomers: async function({ commit }){
       console.log('actions.getCustomers()')
       let data = await fetch('http://localhost:8000/customers/');
@@ -69,9 +69,16 @@ export default new Vuex.Store({
       let data = await fetch('http://localhost:8000/all_trailers/');
       let trailers = await data.json();
       commit('trailers', trailers);
-    }
+    },
+    
   },
   modules: {
   },
-  getters: {}
+  getters: {
+    trip: function(id){
+      // Un Trip con una estructura factorizada
+
+      return [];
+    }
+  }
 })

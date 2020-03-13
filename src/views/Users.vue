@@ -36,17 +36,19 @@
 </template>
 
 <script>
-console.log('Users');
+console.log('Users.vue');
 
 import { mapState, mapMutations, mapActions } from 'vuex';
+// console.dir(mapActions);
 
 export default {
     name: 'Users',
     computed: {
-        ...mapState(['users']),
-        ...mapActions(['getUsers']),
+        ...mapState(['users'])
+        // ...mapActions(['getUsers']),
     },
     methods: {
+          ...mapActions(['getUsers']),
         newUser: function(){
             console.log('newUser()');
             this.$router.push('/detailUser');
@@ -56,11 +58,18 @@ export default {
         },
         deleteUser: function(){
             console.log('deleteUser()');
+        },
+        allUsers: function(){
+            console.log('method.AllUsers()');
+            this.dispatch('getUsers');
+
         }
     },
-    created: function(){
+    created: function(context){
         console.log('users.created()');
         this.$store.dispatch('getUsers');
+        // context.dispatch('getUsers');
+        // this.allUsers();
 
     },
     mounted: function(){
@@ -69,5 +78,5 @@ export default {
 }
 </script>
 
-<style scoped src='@/assets/css/table.css'>
-</style>
+<style scoped src='@/assets/css/table.css'></style>
+<style scoped></style>

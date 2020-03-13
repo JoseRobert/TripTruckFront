@@ -1,14 +1,15 @@
 //  detailUser.vue
 <template>
-    <div class='container ctn_1'>
-        <div class='titleProps'>User - detail</div>  
+    <div class='container'>
+        <div class='titleProps'>User - Detail</div>  
         <div class="row">
+            <!-- <div id='msgForm' class='col-12 msg_form'>Message</div> -->
             <form id='formUser' class='col formBase' onsubmit="return false;" novalidate autocomplete="nope" data-btnEnable='btnSave'>
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="username" class="formControlLabel">User*</label>
                         <input type="text" name="username" class="form-control form-control-sm" id="user" placeholder="User"
-                                oninput="evalInput(this)" pattern="^[a-zA-Z]{1}[a-z0-9-_]{1,9}$" required autofocus>
+                                @input="input($event.target)" pattern="^[a-zA-Z]{1}[a-z0-9-_]{1,9}$" required autofocus>
                         <small id="userError" class="form-text text-muted">User... </small>
                     </div>
                 </div>
@@ -28,7 +29,7 @@
                     <div class="col form-group">
                         <label for="name" class="formControlLabel">Name*</label>
                         <input type="text" name='name' class="form-control form-control-sm" id="name" placeholder="Full Name"
-                            oninput="evalInput(this)" pattern="^[A-Z]{1}[a-zA-Z -]{1,25}$" required>
+                            @input="input($event.target)" pattern="^[A-Z]{1}[a-zA-Z -]{1,25}$" required>
                         <small id="nameError" class="form-text text-muted"></small>
                     </div>
                 </div>
@@ -36,7 +37,7 @@
                     <div class="col form-group">
                         <label for="phone" class="formControlLabel">Mobile</label>
                         <input type="tel" name='phone' class="form-control form-control-sm" id="phone" placeholder="Mobile"
-                            oninput="evalInput(this)" pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$">
+                            @input="input($event.target)" pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$">
                         <small id="mobileError" class="form-text text-muted">###-###-####</small>
                     </div>
                 </div>
@@ -44,29 +45,28 @@
                     <div class="col-6 form-group">
                         <label for="password" class="formControlLabel">Password*</label>
                         <input type="password" name='password' class="form-control form-control-sm" id="password" placeholder="Password"
-                                oninput="evalInput(this)" pattern="^[A-Za-z]{4,}[0-9]{1,4}$" required>
-                                <span></span>   
+                                @input="input($event.target)" pattern="^[A-Za-z]{4,}[0-9]{1,4}$" required>
                         <small id="passwordError" class="form-text text-muted">Minimo 5 caracteres, un digito minimo</small>
                     </div>
                     <div class="col-6 form-group">
                         <label for="repassword" class="formControlLabel">Confirm Password*</label>
                         <input type="password" name='repassword' class="form-control form-control-sm" id="repassword" placeholder="Confirm password"
-                        oninput="evalInput(this)" pattern="^[A-Za-z]{4,}[0-9]{1,4}$" required>         
+                        @input="input($event.target)" pattern="^[A-Za-z]{4,}[0-9]{1,4}$" required>         
                         <small id="repasswordError" class="form-text text-muted"></small>
                     </div>
-                    <div class="col-12 form-group">
-                        <div class="form-control form-control-sm">
-                            <label for="seePw" class="formControlLabel"></label>
-                            <input type="checkbox" name='seePw' class='d-none' id='seePw' onclick="seePassword(this, ['repassword','password'])"
-                            />
-                            <label for='seePw'>Ver password<i class="far fa-eye"></i></label>
+                    <div class="col form-group">
+                        <div class="form-control form-control-sm seePw">
+                            <!-- <label for="seePw" class="formControlLabel"></label> -->
+                            <input type="checkbox" name='seePw' class=' d-none' id='seePw' @click="see_pw($event.target, ['repassword','password'] )" />
+                            <label for='seePw'><i class="far fa-eye"></i></label>
                         </div>
-                    </div>
+                    </div>  
+                   
                 </div>
             </form>
         </div>
-        <div class='row'>
-            <button id='btnSave' class="btn btn-sm btn_1 col" disabled @Click="sendForm()">Save</button>
+        <div class='row btns_crud'>
+            <button id='btnSave' class="btn btn-sm btn_1 col" disabled @click="sendForm()">Save</button>
             <button class="btn btn-sm btn_1 col" @click="resetForm()">Reset</button>
             <button class="btn btn-sm btn_1 col" @click="exitForm()">Exit</button>
         </div>     
@@ -74,19 +74,69 @@
 </template>
 
 <script>
+console.log('detailUser.vue');
 
-require('@/assets/js/form.js');
+var idForm = 'formUser';
+
+import { evalInput, evalForm, seePassword } from '@/assets/js/form';
 
 export default {
     name: 'detailUser',
 
-
     methods: { 
-        sendForm: function(){},
-        resetForm: function(){},
+        sendForm: function(){
+            console.log('sendForm');
+            // Validacion de form
+            let objForm =  document.getElementById(idForm);
+           
+            if (evalForm( !idForm ) ) {
+                console.log( 'Error.');
+                return
+            }else{
+                if( objForm.password.value == objForm.repassword.value){
+                    objForm.submit();
+                    // alert('Successful');
+                }else{
+                    alert('Claves no son iguales');
+                }
+            }
+            // Verificar el id (username) - msgError
+            if ( existUser(objForm) ) {
+
+            }
+            // Configurar obj. Form: metodo (post, put, delete)
+            let formData = new FormData (objForm);
+
+            // Fetch - msgError
+            // msg-Success
+            // Leer todos los usuarios (users[])
+            // Mostrar view Users
+        },
+        resetForm: function(){
+            document.getElementById(idForm).reset();
+        },
         exitForm: function(){
             console.log('exitForm()');
             this.$router.push('/users');
+        },
+        input: function(self){
+            console.log('evalInput method.')
+            evalInput(self);
+        },
+        see_pw: function(self, names){
+            seePassword(self, names);
+        },
+        existUser: async function (user){
+            console.log('Verificando existencia de user')
+            let url = 'http://localhost:8000/user/';
+            let options = {
+                method: 'POST',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+                body: objForm
+            };
+            let data = await fetch(url, options);
+            let rpta = await data.json();
+
         }
     }, 
     created: function(){
@@ -95,7 +145,7 @@ export default {
     },
     mounted: function(){
         console.log('form.User.mounted()')
-        let idForm='formUser';
+
     },       
     destroyed: function(){
         console.log('form.User.destroyed()');
@@ -103,5 +153,4 @@ export default {
 }
 </script>
 
-<style scoped src="@/assets/css/form.css">
-</style>
+<style scoped src="@/assets/css/form.css"></style>

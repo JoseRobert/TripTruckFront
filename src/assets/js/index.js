@@ -7,6 +7,9 @@ console.log('index.js');
 function start(){
    console.log('start()') ;
 }
+function prueba(){
+    Console.log('Probando...');
+}
 // -------- Events ----------
 (function(){
     window.addEventListener('load', start, false);
