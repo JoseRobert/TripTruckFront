@@ -32,7 +32,7 @@
 </template>
 
 <script>
-console.log('Customers');
+console.log('Customers.vue');
 
 import { mapState, mapMutations, mapActions } from 'vuex';
 

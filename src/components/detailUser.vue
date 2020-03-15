@@ -2,9 +2,9 @@
 <template>
     <div class='container'>
         <div class='titleProps'>User - Detail</div>  
-        <div class="row">
-            <!-- <div id='msgForm' class='col-12 msg_form'>Message</div> -->
-            <form id='formUser' class='col formBase' onsubmit="return false;" novalidate autocomplete="nope" data-btnEnable='btnSave'>
+        <div class="row d-flex justify-content-center">
+            <div id='msgForm' class='col-12 col-lg-8 msg_form' v-if="msg_view">Message</div>
+            <form id='formUser' class='col-12 col-lg-8 formBase' onsubmit="return false;" novalidate autocomplete="nope" data-btnEnable='btnSave'>
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="username" class="formControlLabel">User*</label>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="form-row">
                     <div class="col form-group">
-                        <label for="name" class="formControlLabel">Name*</label>
+                        <label for="name" class="formControlLabel">Full Name*</label>
                         <input type="text" name='name' class="form-control form-control-sm" id="name" placeholder="Full Name"
                             @input="input($event.target)" pattern="^[A-Z]{1}[a-zA-Z -]{1,25}$" required>
                         <small id="nameError" class="form-text text-muted"></small>
@@ -65,10 +65,12 @@
                 </div>
             </form>
         </div>
-        <div class='row btns_crud'>
-            <button id='btnSave' class="btn btn-sm btn_1 col" disabled @click="sendForm()">Save</button>
-            <button class="btn btn-sm btn_1 col" @click="resetForm()">Reset</button>
-            <button class="btn btn-sm btn_1 col" @click="exitForm()">Exit</button>
+        <div class='row btns_crud d-flex justify-content-center'>
+            <div class='col-12 col-lg-8 d-flex justify-content-center'>
+                <button id='btnSave' class="col-4 btn btn-sm btn_1 col" disabled @click="sendForm()">Save</button>
+                <button class="col-4 btn btn-sm btn_1 col" @click="resetForm()">Reset</button>
+                <button class="col-4 btn btn-sm btn_1 col" @click="exitForm()">Exit</button>
+            </div>
         </div>     
     </div>
 </template>
@@ -78,11 +80,21 @@ console.log('detailUser.vue');
 
 var idForm = 'formUser';
 
+import { mapState, mapMutations, mapActions } from 'vuex';
 import { evalInput, evalForm, seePassword } from '@/assets/js/form';
+import Swal from 'sweetalert2';
 
 export default {
     name: 'detailUser',
-
+    data() {
+        return {
+             msg_view : false
+        }
+    },
+    computed: {
+        ...mapState(['users','crud','record'])
+        // ...mapActions(['getUsers']),
+    },
     methods: { 
         sendForm: function(){
             console.log('sendForm');
@@ -94,7 +106,7 @@ export default {
                 return
             }else{
                 if( objForm.password.value == objForm.repassword.value){
-                    objForm.submit();
+                    //objForm.submit();
                     // alert('Successful');
                 }else{
                     alert('Claves no son iguales');
@@ -102,13 +114,15 @@ export default {
             }
             // Verificar el id (username) - msgError
             if ( existUser(objForm) ) {
-
+                console.log('Existe user name?');
             }
             // Configurar obj. Form: metodo (post, put, delete)
             let formData = new FormData (objForm);
 
+
             // Fetch - msgError
             // msg-Success
+
             // Leer todos los usuarios (users[])
             // Mostrar view Users
         },
@@ -144,7 +158,8 @@ export default {
         // this.$store.dispatch('getUsers');
     },
     mounted: function(){
-        console.log('form.User.mounted()')
+        console.log('form.User.mounted()');
+    // console.log('crud:', crud);
 
     },       
     destroyed: function(){

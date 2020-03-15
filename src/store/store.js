@@ -13,19 +13,21 @@ export default new Vuex.Store({
     trips: [],
     trucks: [],
     trailers: [],
-    customers: []
+    customers: [],
+    crud: '*',
+    record: {}
   },
   mutations: {
     setUser: function(state, data){
       state.user = data;
     },
-    customers: function(state, data){
+    customers: function(state, customers){
       console.log('mutations.customers()');
-      state.customers = data;
+      state.customers = customers;
     },
-    users: function(state, data){
+    users: function(state, users){
       console.log('mutations.users()');
-      state.users = data;
+      state.users = users;
     },
     trucks: function(state, data){
       console.log('mutations.trucks()');
@@ -34,7 +36,14 @@ export default new Vuex.Store({
     trailers: function(state, data){
       console.log('mutations.trailers()');
       state.trailers = data;
-    }      
+    },
+    setCrud: function(state, crud){
+      state.crud = crud;
+    },
+    setRecord: function(state, record){
+      state.record = record;
+
+    }
   },
   actions: {
       // { commit, dispatch } = objetos contexto

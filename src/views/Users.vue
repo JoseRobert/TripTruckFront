@@ -25,8 +25,8 @@
                     <td> {{ user.role }} </td>
                     <td> {{ user.mobile }} </td>
                     <td class='d-flex'>
-                        <button class='btn btn-sm btn_1' @click='editUser'>Edit</button>
-                        <button class='btn btn-sm btn_1' @click='deleteUser'>Delete</button>
+                        <button class='btn btn-sm btn_1' @click='editUser(index)'>Edit</button>
+                        <button class='btn btn-sm btn_1' @click='deleteUser(index)'>Delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -39,28 +39,57 @@
 console.log('Users.vue');
 
 import { mapState, mapMutations, mapActions } from 'vuex';
-// console.dir(mapActions);
 
+import Swal from 'sweetalert2';
+let optAlert = require('../assets/json/opt_swal2.json');
+const swal2 = Swal.mixin(optAlert);
+
+// console.dir(mapActions);
 export default {
     name: 'Users',
     computed: {
-        ...mapState(['users'])
+        ...mapState(['users','crud','record'])
         // ...mapActions(['getUsers']),
     },
     methods: {
-          ...mapActions(['getUsers']),
+            // ...mapState(['users','crud','record']),
+            ...mapActions(['getUsers']),
+            ...mapMutations(['setCrud','setRecord']),
         newUser: function(){
             console.log('newUser()');
+            this.$store.commit('setCrud', 'C');
+            this.$store.commit('setRecord', {});
             this.$router.push('/detailUser');
         },
-        editUser: function(){
-            console.log('editUser()');
+        editUser: function(index){
+            console.log('editUser('+index+')');
+            this.$store.commit('setCrud', 'U');
+            this.$store.commit('setRecord', {name: 'Robert'});
+            this.$router.push('/detailUser');
         },
-        deleteUser: function(){
-            console.log('deleteUser()');
+        deleteUser: function(index){
+            console.log('deleteUser('+index+')');
+            debugger
+            this.$store.commit('setCrud', 'D');
+            console.log(users);
+            let user = this.objUser(index);
+            this.$store.commit('setRecord', user);
+            this.$router.push('/detailUser');
+        },
+        objUser(index){
+            console.log('objUser(index)');
+            let user = new Object();
+            user._id = users[index]._id;
+            user.username= users[index].username;
+            user.name = users[index].name;
+            user.role = users[index].role;
+            user.phone = users[index].phone;
+            user.password = users[index].password;
+            console.log(user);
+            return user;
         },
         allUsers: function(){
-            console.log('method.AllUsers()');
+            console.log('method.allUsers()');
             this.dispatch('getUsers');
 
         }
@@ -74,9 +103,10 @@ export default {
     },
     mounted: function(){
         console.log('users.mounted()')
+        swal2.fire(); 
     }    
 }
 </script>
 
 <style scoped src='@/assets/css/table.css'></style>
-<style scoped></style>
+<style scoped src='@/assets/css/sweetalert2.css'></style>

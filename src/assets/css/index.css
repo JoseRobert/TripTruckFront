@@ -75,9 +75,9 @@ body {
     /* background-image: url("../../media/Rhombus_Pattern.jpg");   
     background-size: auto; */
     /* min-width: 360px; */
-    border-radius: var(--border-radius) !important; 
+    /* border-radius: var(--border-radius) !important;  */
 }
-div form {
+div, form {
     border-radius: var(--border-radius) !important;     
 }
 /* Container de Componentes */
@@ -99,8 +99,8 @@ div form {
     justify-content: center;
 }
 .icon_user {
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 23px;
     border-radius: 50%;
     background-color: white;
     text-align: center;
@@ -162,22 +162,24 @@ div form {
 /* ----------- component -------------------------- */
 /*  Button */
 .btn_1  {
-    background-color: rgb(220, 199, 245);
+    background-color: rgb(220, 199, 245) !important;
     color: black;
     border: 0.1rem 0.2rem;
     padding: 0.07rem 0.2rem;
     margin: 0 0.07rem;
-
+    border-radius: var(--border-radius) !important;     
 }
 .btn_1:hover {
     color: white;
 }
 .btn_1:focus {
-
+    box-shadow:  none;
 }
-/* .btn_1:active {
-	transform: scale(.95);
-} */
+
+.btn_1:active {
+    transform: scale(.95);
+    box-shadow:  none;
+}
 
 /* -------------------------------------- */
 
@@ -226,6 +228,9 @@ div form {
         /* background-color: cadetblue;   */
         
     }
+    btn_1 {
+        border: 1px solid black !important;
+    }
     
     }  /*  End lg */
     
@@ -238,5 +243,10 @@ div form {
         /* background-color: silver;   */
     
     }
+    div {
+
+    }
     
     }   /*  End xl */
+
+   
