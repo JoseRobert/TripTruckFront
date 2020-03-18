@@ -3,7 +3,6 @@
 console.log('index.js');
 
 // var path = window.location.pathname;   // HTML name current
-var ALERT_TIME = 3000;
 
 function start(){
    console.log('start()') ;

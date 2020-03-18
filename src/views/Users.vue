@@ -1,37 +1,38 @@
 //  Users.vue
 <template>
-    <div class='container ctn_1'>
-        <div class='titleProps'>Users</div> 
-        <div class='d-flex align-items-center justify-content-between'>
-            <button class='btn btn-sm btn_1' @click="newUser">New</button>
-            <div>Find component</div>
+    <div class='container content'>
+        <div class="row">
+            <div class='col-12 titleProps'>Users</div> 
+            <div class='col-12 d-flex align-items-center justify-content-between'>
+                <button class='btn btn-sm btn_1' @click="newUser">New</button>
+                <input type='text' size="25" value='' class="form-control-sm" placeholder='Find'>
+            </div>
+            <table class='table table-sm table-bordered table-hover col-11 table_1'>
+                <thead class='rounded-top'>
+                    <tr>
+                        <th>#</th>
+                        <th>User</th>
+                        <th>Full Name</th>
+                        <th>Role</th>
+                        <th>Phone</th>
+                        <th class='text-center'>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class='' v-for="(user, index) in users" :key='index'>
+                        <td> {{ index+1 }} </td>
+                        <td> {{ user.username }} </td>
+                        <td> {{ user.name }} </td>
+                        <td> {{ user.role }} </td>
+                        <td> {{ user.mobile }} </td>
+                        <td class='d-flex justify-content-center'>
+                            <button class='btn btn-sm btn_1 flex-fill' @click='editUser(index)'>Edit</button>
+                            <button class='btn btn-sm btn_1 flex-fill' @click='deleteUser(index)'>Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <table class='table table-sm table-bordered table-hover'>
-            <thead class='rounded-top'>
-                <tr>
-                    <th>#</th>
-                    <th>User</th>
-                    <th>Full Name</th>
-                    <th>Role</th>
-                    <th>Phone</th>
-                    <th class='text-center'>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class='' v-for="(user, index) in users" :key='index'>
-                    <td> {{ index+1 }} </td>
-                    <td> {{ user.username }} </td>
-                    <td> {{ user.name }} </td>
-                    <td> {{ user.role }} </td>
-                    <td> {{ user.mobile }} </td>
-                    <td class='d-flex'>
-                        <button class='btn btn-sm btn_1' @click='editUser(index)'>Edit</button>
-                        <button class='btn btn-sm btn_1' @click='deleteUser(index)'>Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
     </div>
 </template>
 
@@ -64,20 +65,21 @@ export default {
         editUser: function(index){
             console.log('editUser('+index+')');
             this.$store.commit('setCrud', 'U');
-            this.$store.commit('setRecord', {name: 'Robert'});
+            // console.log(this.$store.state.users[index]);
+            let user = this.$store.state.users[index];
+            this.$store.commit('setRecord', user);
             this.$router.push('/detailUser');
         },
         deleteUser: function(index){
             console.log('deleteUser('+index+')');
-            debugger
             this.$store.commit('setCrud', 'D');
-            console.log(users);
-            let user = this.objUser(index);
+            let user = this.$store.state.users[index];
             this.$store.commit('setRecord', user);
             this.$router.push('/detailUser');
         },
-        objUser(index){
-            console.log('objUser(index)');
+        objUser: function(index){
+            console.log('objUser('+index+')');
+            console.log(users[index]);
             let user = new Object();
             user._id = users[index]._id;
             user.username= users[index].username;
@@ -85,8 +87,10 @@ export default {
             user.role = users[index].role;
             user.phone = users[index].phone;
             user.password = users[index].password;
-            console.log(user);
+            user.repassword = users[index].password;
+            console.log('user = ', user);
             return user;
+
         },
         allUsers: function(){
             console.log('method.allUsers()');
@@ -102,8 +106,8 @@ export default {
 
     },
     mounted: function(){
-        console.log('users.mounted()')
-        swal2.fire(); 
+        console.log('users.mounted()');
+        // swal2.fire({title: 'TITLE', text:'text'}); 
     }    
 }
 </script>

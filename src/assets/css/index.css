@@ -3,25 +3,28 @@
 @charset "UTF-8";
 
 /* @import url('Fonts: https://fonts.googleapis.com/css?family=???'); */
-/* @import url(theme_1.css); */
+@import url(sweetalert2.css);
 
 :root {
     /*  Main  */
-    --background-main: rgb(136, 198, 206) ;
-    --background-content: rgb(99, 82, 82) ;
+    --background-main: rgb(224, 239, 240);
     --color-main: black;
-    --border-radius: 0.13rem;
+
+    --background-content: rgb(99, 82, 82);
+    --border-radius: 0.20rem;
     /* --border-main: 
     --border-content:  */
     
     /*  Menu NavBar */
-    --background-menu: #BD0219;
+    --background-menu: rgb(213, 213, 213);
     --font-color: #cbd5db;
-    --brand-color: rgb(121, 136, 119) ;
+    --brand-color: rgb(121, 136, 119);
     /* #5f788a */
     /* #485A75 */ 
     /*  SubMenu Nav */
     
+
+    /*  Content */
     --colorTitle: black;
 
     /*  Buttons  */
@@ -80,17 +83,23 @@ body {
 div, form {
     border-radius: var(--border-radius) !important;     
 }
+#app {
+   padding: 0 1px; 
+   height: 99vh;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+}
 /* Container de Componentes */
-.ctn_1 {
+/* .ctn_1 {
     background-color: rgb(238, 236, 236);
     padding: 0.1rem 0.3rem;
-}
+} */
 
 .titleProps {
     font-size: 1.1rem;
-    margin: 0.3rem;
+    margin: 0.4rem 0;
     color: var(--colorTitle);
-    text-align: center;
 }  
 /* End Componentes */
 .icon_ctn {
@@ -99,10 +108,11 @@ div, form {
     justify-content: center;
 }
 .icon_user {
-    width: 23px;
-    height: 23px;
+    width: 1.53rem;
+    height: 1.53rem;
     border-radius: 50%;
-    background-color: white;
+    line-height: 1.53rem;
+    background-color: whitesmoke;
     text-align: center;
 
 }
@@ -122,18 +132,45 @@ div, form {
 .router-link-active + div {
     display: block;
     width: 100%;
-    height: 0.10rem;
-    /* border-bottom: 2px solid black; */
+    height: 0.30rem;
     border-bottom-width: 1.3px;
     border-bottom-style: solid;
     border-bottom-color: white;
-    /* color: inherit; */
-
 }
 /*  Menu - navbar */
-
+.menu, .subMenu {
+    background-color: var(--background-menu) !important;
+    margin: 0.133rem;
+    padding: 0.134rem;
+    height: 2rem;
+}
 /*  SubMenu - nav */
+.subMenu {
+    background-color: var(--background-menu) !important;
 
+    /* height: 2rem; */
+}
+/*  Content */
+.content {
+    background-color: rgb(213, 213, 213);
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* margin: 2px; */
+}
+/*  Tablas */
+.table_1 {
+    color: kaki !important;
+    /* padding: 5px !important; */
+    /* border: 1px solid red !important; */
+    /* width: 90%; */
+}
+.table_1 tbody tr {
+  height: 1rem !important;
+}
+.table_1 tbody td {
+    padding: 0 4px !important
+}
 /* Botones */
 .btnProp {
     background-color: var(--btnBackground);
@@ -162,7 +199,7 @@ div, form {
 /* ----------- component -------------------------- */
 /*  Button */
 .btn_1  {
-    background-color: rgb(220, 199, 245) !important;
+    background-color: rgb(213, 196, 233) !important;
     color: black;
     border: 0.1rem 0.2rem;
     padding: 0.07rem 0.2rem;
@@ -193,11 +230,10 @@ div, form {
     
     }
     
-    }  /*  End xs */
+}  /*  End xs */
     
-    /*  Small devices (landscape phones, 576px and up) */
-    @media (min-width: 576px) { /* sm */
-            
+/*  Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) { /* sm */        
     html {
         font-size: 13px; 
     }
@@ -215,12 +251,10 @@ div, form {
         /* background-color: salmon;   */
     
     }
+}  /*  End md */
     
-    }  /*  End md */
-    
-    /* Large devices (desktops, 992px and up) */
-    @media (min-width: 992px) {  /* lg */
-    
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {  /* lg */
     html {
         font-size: 15px; 
     }
@@ -232,10 +266,10 @@ div, form {
         border: 1px solid black !important;
     }
     
-    }  /*  End lg */
+}  /*  End lg */
     
-    /* Extra large devices (large desktops, 1200px and up) */
-    @media (min-width: 1200px) {  /* xl */
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  /* xl */
     html {
         font-size: 15px; 
     }
@@ -247,6 +281,6 @@ div, form {
 
     }
     
-    }   /*  End xl */
+}   /*  End xl */
 
    

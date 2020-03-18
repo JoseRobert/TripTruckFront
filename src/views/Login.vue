@@ -1,16 +1,15 @@
 //  Login.vue
 
 <template>
-<div class="container">
+<div class="container content">
     <div class='titleProps'>Login</div> 
-
     <div class="row ">
         <form id='formLogin' action="/postsign" method='POST' class='col' onsubmit="return false" novalidate autocomplete="nope" data-btnEnable='login'>
             <div class="form-row row">
                 <div class="col form-group">
                     <label for="user" class="formControlLabel">User*</label>
                     <input type="text" name="username" class="form-control form-control-sm" id="user" placeholder="User"
-                            oninput="evalInput(this)" pattern="^[a-zA-Z]{4}[a-z0-9-_]{1,9}$" required autofocus>
+                             @input="input($event.target)" pattern="^[a-zA-Z]{4}[a-z0-9-_]{1,9}$" required autofocus>
                     <small id="userError" class="form-text text-muted">Inicia minimo 4 caracteres y finaliza con digito(s) numericos</small>
                 </div>
             </div>
@@ -18,15 +17,15 @@
                 <div class="col form-group">
                     <label for="password" class="formControlLabel">Password*</label>
                     <input type="text" name='passw' class="form-control form-control-sm" id="password" placeholder="Password"
-                            oninput="evalInput(this)" pattern="^[A-Za-z]{4,}[0-9]{1,4}$" required>
+                             @input="input($event.target)" pattern="^[A-Za-z]{4,}[0-9]{1,4}$" required>
                     <small id="passwordError" class="form-text text-muted">Inicia minimo 4 caracteres y finaliza con uno o mas digitos</small>
                 </div>
             </div>
         </form>
     </div>
-    <div class='row groupBtns d-flex'>
-        <button id='login' class="btn boton btn-sm btn-primary col" disabled @click="login()">Login</button>
-        <button class="btn boton btn-sm btn-primary col" @click="exitLogin()">Exit</button>
+    <div class='row d-flex'>
+        <button id='login' class="btn boton btn-sm btn_1 col" disabled @click="login()">Login</button>
+        <button class="btn boton btn-sm btn_1 col" @click="exitLogin()">Exit</button>
     </div>
 
 
@@ -38,22 +37,34 @@ console.log('Login.vue');
 
 import { mapMutations }  from 'vuex';
 
+import { evalInput, evalForm, seePassword } from '@/assets/js/form';
+
+import Swal from 'sweetalert2';
+let optAlert = require('../assets/json/opt_swal2.json');
+const swal2 = Swal.mixin(optAlert);
+
 export default {
     name: 'login',
-   computed: {
+    computed: {
         ...mapMutations(['setUser'])
     },
     methods: {
         login: function(){
-            console.log('newCustomer()');
-            this.$router.push('/');
+            console.log('login()');
+            // this.$router.push('/');
+            // Validacion de Form
+            // Existencia de user (server)
 
 
         },
          exitLogin: function(){
             console.log('exitLogin()');
             location.href="/home.html";
-        }
+        },
+        input: function(self){
+            // console.log('evalInput method.')
+            evalInput(self);
+        },        
     }  
 
 }

@@ -10,9 +10,7 @@ import store from './store/store.js';
 
 require('@/assets/js/index.js');
 require('@/assets/css/index.css');
-
-//import { evalInput, evalForm, test  } from '@/assets/js/form';
-// console.log('---------');
+require('@/assets/css/table.css');
 
 // Vue.use(VueGlobalVariable, {
 //   $ALERT_TIME : 3000

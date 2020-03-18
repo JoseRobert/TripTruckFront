@@ -87,7 +87,7 @@ export default new Vuex.Store({
     trip: function(id){
       // Un Trip con una estructura factorizada
 
-      return [];
+      return users[0];
     }
   }
 })

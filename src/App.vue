@@ -1,14 +1,14 @@
 <template>
-  <div id="app" class='container-fluid'>
-    <nav id='Menu' class="navbar navbar-expand-sm navbar-light bg-light justify-content-center">  
+  <div id="app" class='container-fluid sticky-top '> 
+    <nav id='Menu' class="navbar navbar-expand-sm navbar-light bg-light menu justify-content-center">  
 
       <router-link class="navbar-brand" to="/">Phoenix</router-link>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav ">
+          <ul class="navbar-nav">
             <li class="nav-item">
               <router-link class="nav-link" to="/trips">Trips</router-link>
                <div></div>
@@ -24,6 +24,7 @@
           </ul>
       </div>
     </nav> 
+    <!-- Router view -->
     <transition name=''>
       <router-view/>
     </transition>
@@ -57,27 +58,31 @@ export default {
 
 <style scoped>
 :root {
-    --padding: 0.15rem;
-    --bgMenus: rgb(121, 162, 167);
-  } 
-  
-  #Menu {
-    background-color: var(--bgMenus) !important;
-    padding: var(--padding);
-    height: 2rem;
-  }
-  .navbar-brand {
-    padding: var(--padding);
-  }
-  .nav-item {
-    padding: var(--padding);
-  
-  }
-  a:hover {
-    color: white;
-  }
-  .nav-link {
-    padding: var(--padding);  
-  }
-  
+  --padding: 0.3rem;
+  /* --bgMenus: rgb(121, 162, 167); */
+} 
+
+.navbar-brand {
+  padding-left: var(--padding) !important;
+}
+.navbar {
+ padding: var(--padding);
+}
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items:baseline;
+
+}
+.nav-item {
+  padding: var(--padding);
+
+}
+a:hover {
+  color: white;
+}
+.nav-link {
+  padding: var(--padding);  
+}
+
 </style>
