@@ -21,19 +21,19 @@ export default new Vuex.Store({
     setUser: function(state, data){
       state.user = data;
     },
-    customers: function(state, customers){
-      console.log('mutations.customers()');
+    setCustomers: function(state, customers){
+      console.log('mutations.setCustomers()');
       state.customers = customers;
     },
-    users: function(state, users){
-      console.log('mutations.users()');
+    setUsers: function(state, users){
+      console.log('mutations.setUsers()');
       state.users = users;
     },
-    trucks: function(state, data){
+    setTrucks: function(state, data){
       console.log('mutations.trucks()');
       state.trucks = data;
     },
-    trailers: function(state, data){
+    setTrailers: function(state, data){
       console.log('mutations.trailers()');
       state.trailers = data;
     },
@@ -47,37 +47,51 @@ export default new Vuex.Store({
   },
   actions: {
       // { commit, dispatch } = objetos contexto
-    getCustomers: async function({ commit }){
-      console.log('actions.getCustomers()')
-      let data = await fetch('http://localhost:8000/customers/');
-      let customers = await data.json();
-      commit('customers', customers);
-      // commit('customers', {name: 'cliente01'});
+    allCustomers: async function({ commit }){
+      console.log('actions.allCustomers()');
+      try {
+        let data = await fetch('http://localhost:8000/customers/');
+        let customers = await data.json();
+        commit('setCustomers', customers);
+        // commit('customers', {name: 'cliente01'});        
+      } catch (error) {
+        console.log(error);    
+      }
+
     },
-    getUsers: async function({ commit }){
-      console.log('actions.getUsers()')
-      let data = await fetch('http://localhost:8000/all_users/');
-      let users = await data.json();
-      commit('users', users);
+    allUsers: async function({ commit }){
+      console.log('actions.allUsers()')
+      try {
+        let data = await fetch('http://localhost:8000/all_users/');
+        let users = await data.json();
+        commit('setUsers', users);        
+      } catch (error) {
+        console.log(error);          
+      }
 
     },
     getUser: async function({ commit }){
       console.log('actions.getUsers()')
-      let data = await fetch('http://localhost:8000/all_users/');
-      let users = await data.json();
-      commit('users', users);
+      try {
+        let data = await fetch('http://localhost:8000/users/');
+        let users = await data.json();
+        commit('users', users);        
+      } catch (error) {
+        console.log(error);
+      }
+
     },
-    getTrucks: async function({ commit }){
+    allTrucks: async function({ commit }){
       console.log('actions.getTrucks()')
       let data = await fetch('http://localhost:8000/all_trucks/');
       let trucks = await data.json();
-      commit('trucks', trucks);
+      commit('setTrucks', trucks);
     },     
-    getTrailers: async function({ commit }){
+    allTrailers: async function({ commit }){
       console.log('actions.getTrailers()')
       let data = await fetch('http://localhost:8000/all_trailers/');
       let trailers = await data.json();
-      commit('trailers', trailers);
+      commit('setTrailers', trailers);
     },
     
   },
@@ -88,6 +102,14 @@ export default new Vuex.Store({
       // Un Trip con una estructura factorizada
 
       return users[0];
+    },
+    getUsers: function(state){
+      console.log('getUsers');
+      return state.users;
+    },
+    getAuthorized: function(state){
+      if( !state.user ) return false;
+
     }
   }
 })

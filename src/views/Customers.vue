@@ -1,5 +1,4 @@
 // Customers.vue    
-
 <template>
     <div class='container'>
         <div class='titleProps'>Customers</div>
@@ -40,7 +39,7 @@ export default {
     name: 'Customers',
     computed: {
         ...mapState(['customers']),
-        ...mapActions(['getCustomers']),
+        ...mapActions(['allCustomers']),
     },
     methods: {
         newCustomer: function(){
@@ -50,16 +49,14 @@ export default {
     },
     created: function(){
         console.log('customers.created()');
-        this.$store.dispatch('getCustomers');
+        this.$store.dispatch('allCustomers');
 
     },
     mounted: function(){
         console.log('customers.mounted()')
     }
 }
-//  Con commit llama a mutations y esta cambia el estado
-// Las actions 
-// Actions = logica de negocio
+
 </script>
 
 <style scoped>

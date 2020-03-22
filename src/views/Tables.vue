@@ -24,17 +24,17 @@
 
 <script>
 export default {
-    name: 'Tables'
+  name: 'Tables'
 
 }
 </script>
 
 <style scoped>
 .subMenu {
-    /* background-color: var(--bgMenus) !important; */
-    margin-top: 2px;
-    padding: var(--padding);
-    border-top: 1px solid white;
+  background-color: var(--background-menu) !important;
+  margin-top: 0.13rem;
+  padding: 0.3rem;
+  border-top: 0.072rem solid white;
 }
 
 .subMenu ul {
@@ -44,7 +44,16 @@ export default {
   color: black;
 }
 
-.subMenu a.router-link-exact-active {
-  color: #222e28;
-  }
+.sub_menu {
+  padding: 0.30rem 1rem;
+  padding-bottom: 0.090rem;
+}
+.sub_menu:focus + div {
+  display: block;
+  width: 100%;
+  height: 0.20rem;
+  border-bottom-width: 0.093rem;
+  border-bottom-style: solid;
+  border-bottom-color: white;
+}
 </style>

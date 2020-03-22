@@ -2,7 +2,7 @@
 <template>
     <div class='container content'>
         <div class="row d-flex justify-content-center">
-            <div class='titleProps col-12 col-lg-8'>User - Detail</div>  
+            <div class='titleProps col-12 S'>User - Detail</div>  
             <div id='msgForm' class='col-12 col-lg-8 msg_form' v-if="msg_view">Message</div>
             <form id='formUser' class='col-12 col-lg-8 formBase' onsubmit="return false;" novalidate autocomplete="nope" data-btnEnable='btnSave'>
                 <div class="form-row">
@@ -17,7 +17,7 @@
                     <div class="col form-group">
                         <label for="role" class="formControlLabel">Role*</label>
                         <select name="role" v-model="record.role" class="form-control form-control-sm" id="role" placeholder="Role" required>
-                            <option value="">Select role</option>
+                            <option value="" selected>Select role</option>
                             <option value="Manager">Manager</option>
                             <option value="Driver">Driver</option>
                             <option value="Admin">Guest</option>
@@ -68,10 +68,10 @@
         </div>
         <div class='row btns_crud d-flex justify-content-center'>
             <div class='col-xs-12 col-lg-8 d-flex justify-content-center'>
-                <button id='btnSave' class="col-4 btn btn-sm btn_1 col" disabled @click="sendForm()">Save</button>
-                <button class="col-4 btn btn-sm btn_1 col" @click="confirmForm()">Confirm</button>
-                <button class="col-4 btn btn-sm btn_1 col" @click="resetForm()">Reset</button>
-                <button class="col-4 btn btn-sm btn_1 col" @click="exitForm()">Exit</button>
+                <button id='btnSave' class="btn btn-sm btn_1 col" disabled @click="sendForm()">Save</button>
+                <button class="btn btn-sm btn_1 col d-none" @click="confirmForm()">Confirm</button>
+                <button class="btn btn-sm btn_1 col" @click="resetForm()">Reset</button>
+                <button class="btn btn-sm btn_1 col" @click="exitForm()">Exit</button>
             </div>
         </div>     
     </div>
@@ -186,6 +186,7 @@ export default {
     mounted: function(){
         console.log('form.User.mounted()');
         // this.test();
+        // Segun el metodo 
     },       
     destroyed: function(){
         console.log('form.User.destroyed()');

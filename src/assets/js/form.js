@@ -1,5 +1,5 @@
 //  form.js
-console.log('form.js cargado');
+console.log('form.js');
 
 'use strict';
 
