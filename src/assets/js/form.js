@@ -29,13 +29,13 @@ export function evalInput(obj){
 	let vForm = objForm.checkValidity();					// Evalua la valides inteegral del Form
 
 	//console.log('idForm=', idForm);
-	console.dir(btnEnable);
-	console.dir(objForm);
-	console.log('---------------------------------')
-	// console.log(lblError);
-    console.log('form.checkValidity= ' , vForm );
-    console.log('Resultante final del input = ', lEstado);
-	console.log('input.checkValidity= ', lValido);
+// console.dir(btnEnable);
+// console.dir(objForm);
+// console.log('---------------------------------')
+// console.log(lblError);
+// console.log('form.checkValidity= ' , vForm );
+// console.log('Resultante final del input = ', lEstado);
+// console.log('input.checkValidity= ', lValido);
 
 	//texto = texto.substring(0,texto.length-1);	// elimina el caracter maximo
 
@@ -59,10 +59,10 @@ function evalExpReg(sPatron, sValor){
 	// console.log("evaluaPatron( "+sPatron+" , "+sValor+" )");
 	let oExpReg = new RegExp(sPatron);
 		if (!oExpReg.test(sValor)) {
-			console.log("invalido");
+			// console.log("invalido");
 			return false;
 		}
-		console.log("valido");
+		// console.log("valido");
 		return true;					
 }
 

@@ -2,7 +2,7 @@
 <template>
     <div class='container content'>
         <div class="row d-flex justify-content-center">
-            <div class='titleProps col-12 S'>User - Detail</div>  
+            <div class='titleProps col-12 S'>User - {{ title_detail }} </div>  
             <div id='msgForm' class='col-12 col-lg-8 msg_form' v-if="msg_view">Message</div>
             <form id='formUser' class='col-12 col-lg-8 formBase' onsubmit="return false;" novalidate autocomplete="nope" data-btnEnable='btnSave'>
                 <div class="form-row">
@@ -18,9 +18,9 @@
                         <label for="role" class="formControlLabel">Role*</label>
                         <select name="role" v-model="record.role" class="form-control form-control-sm" id="role" placeholder="Role" required>
                             <option value="" selected>Select role</option>
-                            <option value="Manager">Manager</option>
-                            <option value="Driver">Driver</option>
-                            <option value="Admin">Guest</option>
+                            <option value="Admin">Admin</option>
+                            <option value="Super">Manager</option>
+                            <option value="Users">User</option>
                         </select>
                         <small id="roleError" class="form-text text-muted"></small>
                     </div>
@@ -28,7 +28,7 @@
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="name" class="formControlLabel">Full Name*</label>
-                        <input type="text" name='name' v-model="record.name" class="form-control form-control-sm" id="name" placeholder="Full Name"
+                        <input type="text" name='fullname' v-model="record.fullname" class="form-control form-control-sm" id="name" placeholder="Full Name"
                             @input="input($event.target)" pattern="^[A-Z]{1}[a-zA-Z -]{1,25}$" required>
                         <small id="nameError" class="form-text text-muted"></small>
                     </div>
@@ -36,7 +36,7 @@
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="phone" class="formControlLabel">Mobile</label>
-                        <input type="tel" name='phone' v-model="record.phone" class="form-control form-control-sm" id="phone" placeholder="Mobile"
+                        <input type="tel" name='mobile' v-model="record.mobile" class="form-control form-control-sm" id="phone" placeholder="Mobile"
                             @input="input($event.target)" pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$">
                         <small id="mobileError" class="form-text text-muted">###-###-####</small>
                     </div>
@@ -68,9 +68,9 @@
         </div>
         <div class='row btns_crud d-flex justify-content-center'>
             <div class='col-xs-12 col-lg-8 d-flex justify-content-center'>
-                <button id='btnSave' class="btn btn-sm btn_1 col" disabled @click="sendForm()">Save</button>
-                <button class="btn btn-sm btn_1 col d-none" @click="confirmForm()">Confirm</button>
-                <button class="btn btn-sm btn_1 col" @click="resetForm()">Reset</button>
+                <button id='btnSave' class="btn btn-sm btn_1 col" disabled @click="sendForm()" v-if="crud=='C'">Save</button>
+                <button class="btn btn-sm btn_1 col " @click="confirmDelete()" v-if="crud=='D'">Confirm</button>
+                <button class="btn btn-sm btn_1 col" @click="resetForm()" v-if="crud=='C'">Reset</button>
                 <button class="btn btn-sm btn_1 col" @click="exitForm()">Exit</button>
             </div>
         </div>     
@@ -96,6 +96,8 @@ export default {
     data() {
         return {
             msg_view : false,
+            formMethod: '',
+            title_detail: 'CRUD'
         }
     },
     computed: { // Expone state al template
@@ -104,51 +106,103 @@ export default {
         crud: function(){
             return this.$store.state.crud;
         }
+
     },
     methods: { 
         // ...mapActions(['']),
         // ...mapMutations(['']),
-        sendForm: function(){
-            console.log('sendForm');
+        setComponent: function(){
+            console.log('setComponent()');
+            this.formMethod =''
+            if( this.crud == 'C' ) { this.formMethod = 'POST', this.title_detail = 'Create'};
+            if( this.crud == 'U' ) { this.formMethod = 'PUT', this.title_detail = 'Update'};
+            if( this.crud == 'D' ) { this.formMethod = 'DELETE', this.title_detail = 'Delete'};
+        },
+        sendForm: async function(){
+            console.log('sendForm()');
             // Validacion de form
             let objForm =  document.getElementById(idForm);
-           
+            // console.dir(objForm);
             if ( evalForm( !idForm ) ) {
-                console.log( 'Error.');
-                return
+                console.log( 'Error no existe formulario.');
+                return false;
             }else{
                 if( objForm.password.value != objForm.repassword.value ){
-                    swal2.fire({title: 'Verificacion de Formulario', text:'Claves no son iguales!'});
-                    return;
+                    swal2.fire({title: 'Form verify', text:'Claves no son iguales!'});
+                    return false;
                 }
             }
             // Verificar el id (username) - msgError
-            if ( existUser(objForm) ) {
-                console.log('Existe user name?');
-                return;
+            if ( !this.existUser( objForm.username.value ) ) {
+                // console.log('Existe User?');
+                swal2.fire({title: 'User verify', text:'User exist!'});
+                return false;
             }
             // Configurar obj. Form: metodo (post, put, delete)
-            let formData = new FormData (objForm);
-            conaole.dir(formData);
-            let formMethod =''
-            if( this.crud == 'C' ) formMethod = 'POST';
-            if( this.crud == 'U' ) formMethod = 'PUT';
-            if( this.crud == 'D' ) formMethod = 'DELETE';
-            formData.append('method', formMethod);
+            let formData = new FormData(objForm);
+            console.dir(formData);
 
-
+            // formD,ata.append('method', this.formMethod);
             // Fetch - msgError
+            let url = 'http://localhost:3000/users/create';
+            let text='';
+            let options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData
+                // headers: { 'Content-Type': 'application/json' },
+                // body: JSON.stringify(data)
+                // // mode: 'no-cors',
+            };
+            try {
+                let data = await fetch(url, options);
+                let res = await data.json();
+                if( res.status ){
+                    text = 'Successfull!';        
+                }else{
+                    text = 'Fail!';
+                }
+                swal2.fire({ title: 'New User', text: text });
+                this.exitForm();
+            } catch (error) {
+                console.log('Error:', error);
+            }              
             // msg-Success
 
             // Leer todos los usuarios (users[])
 
             // Mostrar view Users
+
         },
         resetForm: function(){
             document.getElementById(idForm).reset();
         },
-        confirmForm: function(){
-            conole.log('confirmForm()');
+        confirmDelete: async function(){
+            console.log('confirmDelete()');
+            // let objForm = document.getElementById(idForm);
+            //console.dir(objForm);
+            // let formData = new FormData(objForm);
+            // formData.append('_id',  this.record._id );
+            let text = '';
+            let data = { _id: this.record._id };
+            let url = 'http://localhost:3000/users/delete';
+            let options = {
+                method: 'DELETE',
+                // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                // body: formData
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+                // mode: 'no-cors',
+            };
+            try {
+                let data = await fetch(url, options);
+                let res = await data.json();
+                text = (res.status)? text = 'Successfull!': text = 'Fail!';
+                swal2.fire({title: 'User Delete', text:'Fail!'});
+                this.exitForm();
+            } catch (error) {
+                console.log('Error:', error);
+            }
         },
         exitForm: function(){
             console.log('exitForm()');
@@ -161,17 +215,26 @@ export default {
         see_pw: function(self, names){
             seePassword(self, names);
         },
-        existUser: async function (user){
-            console.log('Verificando existencia de user')
-            let url = 'http://localhost:8000/user/';
+        existUser: async function(user){
+            console.log('existUser(): ', user)
+            let url = 'http://localhost:3000/users/user';
             let options = {
                 method: 'POST',
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-                body: objForm
+                // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username : user })
             };
-            let data = await fetch(url, options);
-            let res = await data.json();
-            return res;
+            try {
+                let data = await fetch(url, options);
+                let res = await data.json();
+                // console.log(res);
+                return res.existUser;                 
+            } catch (error) {
+                console.log(error);
+            }
+            // if ( res.existUser ) return true
+            // console.log('Verify: ', res)
+            // return res;
         },
         test: function(){
             console.log('test()');
@@ -182,6 +245,8 @@ export default {
     created: function(){
         console.log('form.User.created()');
         // this.$store.dispatch('getUsers');
+        this.setComponent();
+
     },
     mounted: function(){
         console.log('form.User.mounted()');

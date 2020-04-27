@@ -1,6 +1,6 @@
 <template>
   <div class="home d-flex justify-content-center">
-    <div class='d-block titleProps'>Desde Home</div>
+    <div class='d-block titleProps'>Home</div>
     <!-- <div><img alt="Vue logo" src="../assets/icon/logo.png"></div> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>

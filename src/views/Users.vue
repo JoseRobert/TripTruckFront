@@ -31,9 +31,9 @@
                     <tr class='' v-for="(user, index) in users" :key='index'>
                         <td> {{ index+1 }} </td>
                         <td> {{ user.username }} </td>
-                        <td> {{ user.name }} </td>
+                        <td> {{ user.fullname }} </td>
                         <td> {{ user.role  }} </td>
-                        <td class='d-none d-md-table-cell'> {{ user.phone }} </td>
+                        <td class='d-none d-md-table-cell'> {{ user.mobile }} </td>
                         <td class='justify-content-center'>
                             <button class='btn_actions btn_edit' @click='editUser(index)'>Edit</button>
                             <button class='btn_actions btn_delete' @click='deleteUser(index)'>Delete</button>
@@ -90,6 +90,8 @@ export default {
             console.log('deleteUser('+index+')');
             this.$store.commit('setCrud', 'D');
             let user = this.$store.state.users[index];
+            // console.log('Record => ');
+            // console.dir(user);
             this.$store.commit('setRecord', user);
             this.$router.push('/detailUser');
         },
@@ -108,9 +110,9 @@ export default {
             return user;
 
         },
-        allUsers: function(){
-            console.log('method.allUsers()');
-            this.dispatch('allUsers');
+        userAll: function(){
+            console.log('method.userAll()');
+            this.dispatch('userAll');
 
         },
         searchTable: function(self, fieldsFilter){
@@ -152,7 +154,7 @@ export default {
     },
     created: function(context){
         console.log('users.created()');
-        this.$store.dispatch('allUsers');
+        this.$store.dispatch('userAll');   // allUasers, userAll
         // context.dispatch('allUsers');
     },
     mounted: function(){

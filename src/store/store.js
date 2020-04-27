@@ -59,10 +59,11 @@ export default new Vuex.Store({
       }
 
     },
-    allUsers: async function({ commit }){
-      console.log('actions.allUsers()')
+    userAll: async function({ commit }){
+      console.log('actions.userAll()')
       try {
-        let data = await fetch('http://localhost:8000/all_users/');
+        // let data = await fetch('http://localhost:8000/all_users/');
+        let data = await fetch('http://localhost:3000/users/all/');
         let users = await data.json();
         commit('setUsers', users);        
       } catch (error) {
@@ -72,8 +73,13 @@ export default new Vuex.Store({
     },
     getUser: async function({ commit }){
       console.log('actions.getUsers()')
+      const data = { _id: ''};
+      const options = { method: 'GET', 
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        body: JSON.stringify(data)
+                      };
       try {
-        let data = await fetch('http://localhost:8000/users/');
+        let data = await fetch('http://localhost:3000/users/one', options);
         let users = await data.json();
         commit('users', users);        
       } catch (error) {
@@ -107,6 +113,11 @@ export default new Vuex.Store({
       console.log('getUsers');
       return state.users;
     },
+    getId: function(state){
+      console.log('getId');
+      return state.record._id;
+    }
+    ,
     getAuthorized: function(state){
       if( !state.user ) return false;
 
