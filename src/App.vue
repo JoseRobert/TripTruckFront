@@ -7,7 +7,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon icon_menu"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav1">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
               <router-link class="nav-link" to="/trips">Trips</router-link>
@@ -17,9 +17,9 @@
               <router-link class="nav-link" to="/tables">Tables</router-link>
                <div></div>
             </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/login" v-if="user == '' "><i class="icon_user far fa-user"></i></router-link>
-              <router-link class="nav-link" to="/login" v-if="user != '' "><i class="icon_user far fa-user"></i></router-link>
+            <li class="nav-item ">
+              <router-link class="nav-link icon_user" to="/login" v-if="User_Name == '' "><i class=" far fa-user"></i></router-link>
+              <router-link class="nav-link icon_user" to="/login" v-if="User_Name != '' "><i class="text-center">R</i></router-link>
             </li>
           </ul>
       </div>
@@ -35,23 +35,27 @@
 
 <script>
 console.log('App.vue');
+// const User_Name = '';
+// const User_Rol = '';
 
 import { mapState } from 'vuex';
-
 export default {
   name: 'App',
   methods: {},
   computed: {
-    ...mapState(['user'])
+    ...mapState(['User_Name', 'User_Role'])
   },
   created(){
     console.log('App.vue.created()');
+    // User_Name = this.$store.state.User_Name;
   },
   mounted: function(){
     console.log('App.vue.mounted()');
-    if( this.$store.state.user == ''){
-      this.$router.push('/login');
-    }
+    // console.log('User_Name ===> ', this.$store.state.User_Name);
+    // if( this.$store.state.User_Name == ''){
+    //   this.$router.push('/login');
+    // }
+    // console.log(this.$store.state.User_Name);
   } 
   
 }

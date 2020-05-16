@@ -32,7 +32,7 @@
     --colorTitle: black;
 
     /*  Buttons  */
-    --btnBackground: 	rgb(186, 198, 201);
+    --btnBackground: rgb(186, 198, 201);
     --btnColor: rgb(90, 107, 110);
     --btnBackgroundHover: rgb(166, 188, 192);
     --btnColorHover: rgb(255, 255, 255);
@@ -54,12 +54,12 @@
  
     --inputBackground: plum;
     --inputBackground: rgb(218, 202, 202);
+    --inputBackgroundDisabled: rgb(184, 179, 179);
 
      --inputColor: rgb(240, 240, 240);
 
     --inputColorFocus: rgb(200, 228, 198);
     --inputColorFocus: plum;
-
     --inputColorFocus: black;
 
     --inputColorDisabled: lightgrey;
@@ -94,8 +94,9 @@ body {
     /* justify-content: center;
     align-items: center;*/
     height: 95vh; 
+    height: 600px;     
 }
-div, form, input {
+div, form, input, table {
     border-radius: var(--border-radius) !important;     
 }
 #app {
@@ -127,12 +128,13 @@ div, form, input {
     justify-content: center;
 }
 .icon_user {
-    width: 1.53rem;
-    height: 1.53rem;
+    width: 1.50rem;
+    height: 1.50rem;
     border-radius: 50%;
     line-height: 1.53rem;
     background-color: whitesmoke;
-    text-align: center;
+    /* text-align: center; */
+    padding-right: 0.3rem;
 
 }
 .sub_menu:hover + div{
@@ -176,8 +178,8 @@ div, form, input {
     background-color: rgb(245, 245, 245);
     border: 0.072rem;
     padding: 0.130rem 0.286rem; 
-    font-size: 1rem;
-    width: 13rem;
+    /* font-size: 1rem; */
+    /* width: 13rem; */
 
 }
 .filterTable:focus {
@@ -188,6 +190,21 @@ div, form, input {
 .filterTableIcon {
 
 }
+.filterReset {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    background-color: var(--btnBackground); 
+    border-radius: var(--border-radius) !important;   
+    /* border-top-left-radius: 0 !important;  
+    border-bottom-left-radius: 0 !important; */
+
+}
+.filterReset:hover {
+    cursor: pointer;    
+}
+/*  End Filter Table  */
 
 /*  Tablas */
 .table_1 {
@@ -198,7 +215,6 @@ div, form, input {
     /* border: 1px solid white !important;     */
 
 }
-
 .table_1 tbody {
     /* border: 1px solid white !important; */
   height: 1.5rem !important;
@@ -209,7 +225,6 @@ thead, tbody, tr , td , th{
 }
 th {
     /* Cabecera de tabla */
-    font-weight: 600;
     background-color: rgb(146, 187, 190);
     color: white;
     font-weight: 500;
@@ -338,7 +353,7 @@ td, th {
         
     }
     button, input, select {
-        border: 0.066rem solid rgb(75, 74, 74) !important;
+        border: 0.066rem solid rgb(161, 158, 158) !important;
     }
     
 }  /*  End lg */

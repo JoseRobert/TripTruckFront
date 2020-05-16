@@ -2,15 +2,15 @@
 <template>
     <div class='container content'>
         <div class="row d-flex justify-content-center">
-            <div class='titleProps col-12 S'>User - {{ title_detail }} </div>  
+            <div class='titleProps col-12'>User - {{ title_detail }}</div>  
             <div id='msgForm' class='col-12 col-lg-8 msg_form' v-if="msg_view">Message</div>
             <form id='formUser' class='col-12 col-lg-8 formBase' onsubmit="return false;" novalidate autocomplete="nope" data-btnEnable='btnSave'>
                 <div class="form-row">
                     <div class="col form-group">
                         <label for="username" class="formControlLabel">User*</label>
-                        <input type="text" name="username" v-model="record.username" class="form-control form-control-sm" id="user" placeholder="User"
+                        <input type="text" name="username" v-model="record.username" class="form-control form-control-sm" id="username" placeholder="User name"
                                 @input="input($event.target)" pattern="^[a-zA-Z]{1}[a-z0-9-_]{1,9}$" required autofocus>
-                        <small id="userError" class="form-text text-muted">User... </small>
+                        <small id="userError" class="form-text text-muted">Must start with a letter. Minimun 5 characters.</small>
                     </div>
                 </div>
                 <div class="form-row">
@@ -19,34 +19,34 @@
                         <select name="role" v-model="record.role" class="form-control form-control-sm" id="role" placeholder="Role" required>
                             <option value="" selected>Select role</option>
                             <option value="Admin">Admin</option>
-                            <option value="Super">Manager</option>
-                            <option value="Users">User</option>
+                            <option value="Manager">Manager</option>
+                            <option value="User">User</option>
                         </select>
                         <small id="roleError" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col form-group">
-                        <label for="name" class="formControlLabel">Full Name*</label>
-                        <input type="text" name='fullname' v-model="record.fullname" class="form-control form-control-sm" id="name" placeholder="Full Name"
+                        <label for="fullname" class="formControlLabel">Full Name*</label>
+                        <input type="text" name='fullname' v-model="record.fullname" class="form-control form-control-sm" id="fullname" placeholder="Full Name"
                             @input="input($event.target)" pattern="^[A-Z]{1}[a-zA-Z -]{1,25}$" required>
                         <small id="nameError" class="form-text text-muted"></small>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col form-group">
-                        <label for="phone" class="formControlLabel">Mobile</label>
-                        <input type="tel" name='mobile' v-model="record.mobile" class="form-control form-control-sm" id="phone" placeholder="Mobile"
+                        <label for="mobile" class="formControlLabel">Mobile</label>
+                        <input type="tel" name='mobile' v-model="record.mobile" class="form-control form-control-sm" id="mobile" placeholder="Mobile"
                             @input="input($event.target)" pattern="^(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$">
                         <small id="mobileError" class="form-text text-muted">###-###-####</small>
                     </div>
                 </div>
-                <div class="form-row row">
+                <div class="form-row row" v-if="crud=='C'">
                     <div class="col-6 form-group">
                         <label for="password" class="formControlLabel">Password*</label>
                         <input type="password" name='password' v-model="record.password" class="form-control form-control-sm" id="password" placeholder="Password"
                                 @input="input($event.target)" pattern="^[A-Za-z]{4,}[0-9]{1,4}$" required>
-                        <small id="passwordError" class="form-text text-muted">Minimo 5 caracteres, un digito minimo</small>
+                        <small id="passwordError" class="form-text text-muted">Minimun 5 characters. Must have at least one number at the end.</small>
                     </div>
                     <div class="col-6 form-group">
                         <label for="repassword" class="formControlLabel">Confirm Password*</label>
@@ -68,10 +68,12 @@
         </div>
         <div class='row btns_crud d-flex justify-content-center'>
             <div class='col-xs-12 col-lg-8 d-flex justify-content-center'>
-                <button id='btnSave' class="btn btn-sm btn_1 col" disabled @click="sendForm()" v-if="crud=='C'">Save</button>
-                <button class="btn btn-sm btn_1 col " @click="confirmDelete()" v-if="crud=='D'">Confirm</button>
+                <button id='btnSave' class="btn btn-sm btn_1 col" disabled @click="confirmCreate()" v-if="crud=='C'">Save</button>
+                <button class="btn btn-sm btn_1 col" @click="confirmDelete()" v-if="crud=='D'">Confirm</button>
+                <button class="btn btn-sm btn_1 col" @click="confirmUpdate()" v-if="crud=='U'">Save</button>
                 <button class="btn btn-sm btn_1 col" @click="resetForm()" v-if="crud=='C'">Reset</button>
-                <button class="btn btn-sm btn_1 col" @click="exitForm()">Exit</button>
+                <button class="btn btn-sm btn_1 col" @click="exitForm()" v-if="crud!='R'">Cancel</button>
+                <button class="btn btn-sm btn_1 col" @click="exitForm()" v-if="crud=='R'">Exit</button>
             </div>
         </div>     
     </div>
@@ -80,9 +82,13 @@
 <script>
 console.log('detailUser.vue');
 
-var idForm = 'formUser';
+const idForm = 'formUser';
+console.dir( document.getElementById('userForm') );
 
 import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
+
+import { disabledForm } from '@/assets/js/lib';
+// import phoenix from '@/assets/js/lib';
 
 import { evalInput, evalForm, seePassword } from '@/assets/js/form';
 
@@ -101,12 +107,11 @@ export default {
         }
     },
     computed: { // Expone state al template
-        ...mapState(['users','crud','record']),
+        ...mapState(['User_Name', 'User_Rol', 'users','crud','record']),
         // ...mapGetters(['']),
         crud: function(){
             return this.$store.state.crud;
         }
-
     },
     methods: { 
         // ...mapActions(['']),
@@ -114,77 +119,118 @@ export default {
         setComponent: function(){
             console.log('setComponent()');
             this.formMethod =''
-            if( this.crud == 'C' ) { this.formMethod = 'POST', this.title_detail = 'Create'};
-            if( this.crud == 'U' ) { this.formMethod = 'PUT', this.title_detail = 'Update'};
-            if( this.crud == 'D' ) { this.formMethod = 'DELETE', this.title_detail = 'Delete'};
+            if( this.crud == 'C' ) { this.formMethod = 'POST'; this.title_detail = 'Create'; this.resetForm()};
+            if( this.crud == 'R' ) { this.formMethod = 'GET'; this.title_detail = 'Detail'};            
+            if( this.crud == 'U' ) { this.formMethod = 'PUT'; this.title_detail = 'Edit'};
+            if( this.crud == 'D' ) { this.formMethod = 'DELETE'; this.title_detail = 'Delete' };
+            if( this.crud == 'D' || this.crud == 'R' ) {
+                // console.log('Delete...');
+                disabledForm(idForm, true);
+            }
+            if( this.crud == 'U' ) {
+                // console.log('Update...');
+                disabledForm(idForm, true, ['username']);
+            }            
         },
-        sendForm: async function(){
-            console.log('sendForm()');
+        resetForm: function(){
+            console.log('Reset Form...');
+            document.getElementById(idForm).reset();
+        },        
+        confirmCreate: async function(){
+            console.log('confirmCreate()');
             // Validacion de form
-            let objForm =  document.getElementById(idForm);
-            // console.dir(objForm);
+            let objForm = document.getElementById(idForm);
+            console.dir(objForm);
             if ( evalForm( !idForm ) ) {
                 console.log( 'Error no existe formulario.');
                 return false;
             }else{
                 if( objForm.password.value != objForm.repassword.value ){
-                    swal2.fire({title: 'Form verify', text:'Claves no son iguales!'});
+                    await swal2.fire({title: 'Form verify', text:'Password do not match!'});
                     return false;
                 }
             }
             // Verificar el id (username) - msgError
             if ( !this.existUser( objForm.username.value ) ) {
                 // console.log('Existe User?');
-                swal2.fire({title: 'User verify', text:'User exist!'});
+                await swal2.fire({title: 'User verify', text: 'User exist!'});
                 return false;
             }
-            // Configurar obj. Form: metodo (post, put, delete)
-            let formData = new FormData(objForm);
-            console.dir(formData);
-
-            // formD,ata.append('method', this.formMethod);
-            // Fetch - msgError
+            // let formData = new FormData(objForm);
+            // console.dir(formData);
+            let data = { username: objForm.username.value,  
+                        fullname: objForm.fullname.value,
+                        role: objForm.role.value,
+                        password: objForm.password.value,
+                        mobile: objForm.mobile.value,
+                        currentUser: this.$store.state.User_Name
+                    };
+            // Fetch
             let url = 'http://localhost:3000/users/create';
-            let text='';
             let options = {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: formData
-                // headers: { 'Content-Type': 'application/json' },
-                // body: JSON.stringify(data)
+                //headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                headers: { 'Content-Type': 'application/json' },
+                // headers: { 'Content-Type': 'multipart/form-data' },
+                body: JSON.stringify(data)
                 // // mode: 'no-cors',
+                //body: formData
             };
             try {
+                let text='';
                 let data = await fetch(url, options);
                 let res = await data.json();
-                if( res.status ){
-                    text = 'Successfull!';        
-                }else{
-                    text = 'Fail!';
-                }
-                swal2.fire({ title: 'New User', text: text });
-                this.exitForm();
+                text = (res.status)? 'Successfull!': 'Fail!'; 
+                await swal2.fire({ title: 'New User', text: text });
+                this.exitForm();    // Componente padre
             } catch (error) {
                 console.log('Error:', error);
             }              
-            // msg-Success
-
-            // Leer todos los usuarios (users[])
-
-            // Mostrar view Users
-
         },
-        resetForm: function(){
-            document.getElementById(idForm).reset();
+        confirmUpdate: async function(){
+            console.log('confirmUpdate');
+            let objForm = document.getElementById(idForm);
+            // console.dir(objForm.role.value);
+            let _id = this.record._id;
+
+            let data = {  
+                _id: _id,
+                username: objForm.username.value, 
+                fullname: objForm.fullname.value,
+                role: objForm.role.value,
+                mobile: objForm.mobile.value,
+                currentUser: this.$store.state.User_Name
+            };
+            //  console.log('data =>', data)
+            let url = 'http://localhost:3000/users/update';
+            let options = {
+                method: 'PUT',
+                // headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                // body: formData
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            };
+            try {
+                let text = '';
+                let data = await fetch(url, options);
+                let res = await data.json();
+                text = (res.status)? 'Successfull!': 'Fail!';
+                await swal2.fire({title: 'User Edit', text: text});
+                this.exitForm();
+            } catch (error) {
+                console.log('Error:', error);
+            }
         },
         confirmDelete: async function(){
             console.log('confirmDelete()');
             // let objForm = document.getElementById(idForm);
-            //console.dir(objForm);
+            // console.dir(objForm);
+            // objForm.setAttribute('disabled', true);
+            // objForm.classList.toggle('disabled');
             // let formData = new FormData(objForm);
             // formData.append('_id',  this.record._id );
-            let text = '';
-            let data = { _id: this.record._id };
+
+            let data = { _id: this.record._id , currentUser: this.$store.state.User_Name };
             let url = 'http://localhost:3000/users/delete';
             let options = {
                 method: 'DELETE',
@@ -192,13 +238,14 @@ export default {
                 // body: formData
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
-                // mode: 'no-cors',
             };
             try {
+                let text = '';
                 let data = await fetch(url, options);
                 let res = await data.json();
-                text = (res.status)? text = 'Successfull!': text = 'Fail!';
-                swal2.fire({title: 'User Delete', text:'Fail!'});
+                text = (res.status)? 'Successfull!': 'Fail!';
+                await swal2.fire({title: 'User Delete', text: text});
+                disabledForm(idForm, false);
                 this.exitForm();
             } catch (error) {
                 console.log('Error:', error);
@@ -245,13 +292,14 @@ export default {
     created: function(){
         console.log('form.User.created()');
         // this.$store.dispatch('getUsers');
-        this.setComponent();
-
+        // this.setComponent();
+        // console.log('User_Name = ', User_Name);
+        // this.setComponent();       
     },
     mounted: function(){
         console.log('form.User.mounted()');
-        // this.test();
-        // Segun el metodo 
+        // console.log('User_Name = ', User_Name);
+        this.setComponent();
     },       
     destroyed: function(){
         console.log('form.User.destroyed()');

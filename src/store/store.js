@@ -8,7 +8,8 @@ Vue.use(Vuex)
 //const store = new Vuex.Store({
 export default new Vuex.Store({
   state: {
-    user: 'Bulo',
+    User_Name: 'Bulos',
+    User_Role: '*',
     users: [],
     trips: [],
     trucks: [],
@@ -19,7 +20,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setUser: function(state, data){
-      state.user = data;
+      state.User_Name = data;
     },
     setCustomers: function(state, customers){
       console.log('mutations.setCustomers()');
@@ -42,7 +43,6 @@ export default new Vuex.Store({
     },
     setRecord: function(state, record){
       state.record = record;
-
     }
   },
   actions: {
@@ -62,17 +62,15 @@ export default new Vuex.Store({
     userAll: async function({ commit }){
       console.log('actions.userAll()')
       try {
-        // let data = await fetch('http://localhost:8000/all_users/');
         let data = await fetch('http://localhost:3000/users/all/');
         let users = await data.json();
         commit('setUsers', users);        
       } catch (error) {
         console.log(error);          
       }
-
     },
     getUser: async function({ commit }){
-      console.log('actions.getUsers()')
+      console.log('actions.getUser()')
       const data = { _id: ''};
       const options = { method: 'GET', 
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -106,7 +104,6 @@ export default new Vuex.Store({
   getters: {
     trip: function(id){
       // Un Trip con una estructura factorizada
-
       return users[0];
     },
     getUsers: function(state){
@@ -116,10 +113,9 @@ export default new Vuex.Store({
     getId: function(state){
       console.log('getId');
       return state.record._id;
-    }
-    ,
+    },
     getAuthorized: function(state){
-      if( !state.user ) return false;
+      if( !state.User_Name ) return false;
 
     }
   }

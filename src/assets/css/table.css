@@ -1,6 +1,9 @@
 /* Table */
 
 @charset "UTF-8";
+:root {
+    --flecha: 0.33rem;
+}
 
 table {
     /* width: 400px; */
@@ -11,15 +14,22 @@ table {
     /* empty-cells: show; */
 }
 thead {
-background-color: inherit;
+    background-color: inherit;
 }
 thead tr {
     cursor: pointer;
     border: 0.072rem solid rgb(170, 123, 123);
     font-weight: 400;
 }
+th {
+
+    user-select: none;
+}
 th:hover {
-    color: white; 
+    color: black; 
+}
+th.active {
+
 }
 tbody tr {
     height: 1rem !important;
@@ -35,3 +45,35 @@ background-color: #E0DAE9;
 table:nth-child(even) {
 background-color: #DBE9E7;
 } */
+
+/*  */
+.arrow {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    margin-left: var(--flecha);
+    opacity: 0.66;
+    opacity: 0.80;
+  }
+  .noarrow{
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    margin-left: var(--flecha);
+    border: var(--flecha) solid transparent;
+  }
+  
+  .arrow.asc {
+    border-left: var(--flecha) solid transparent;
+    border-right: var(--flecha) solid transparent;
+    border-bottom: var(--flecha) solid #fff;
+  }
+  
+  .arrow.dsc {
+    border-left: var(--flecha) solid transparent;
+    border-right: var(--flecha) solid transparent;
+    border-top: var(--flecha) solid #fff;
+  }
+  /*  End */

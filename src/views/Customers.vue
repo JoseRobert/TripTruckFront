@@ -2,9 +2,12 @@
 <template>
     <div class='container'>
         <div class='titleProps'>Customers</div>
-
-        <button class='btn btn-sm btn_1' @click="newCustomer">New</button>
-
+            <div class='col-12 d-flex align-items-center justify-content-between'>
+                <button class='btn btn-sm btn_1' @click="newUser">New</button>
+                <input class="form-control filterTable" type="text" size="30" @keyup="searchTable($event, ['username', 'name', 'role'])" placeholder="Type something to search list items" aria-label="Search">
+               <!-- <i class="fas fa-search filterTableIcon"></i> -->
+            </div>
+        <!-- <button class='btn btn-sm btn_1' @click="newCustomer">New</button> -->
         <table class='table table-sm table-bordered table-hover'>
             <thead class='rounded-top'>
                 <tr>
