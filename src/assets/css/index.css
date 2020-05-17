@@ -122,6 +122,8 @@ div, form, input, table {
     border-radius: var(--border-radius) !important;     
 } 
 /* End Componentes */
+
+
 .icon_ctn {
     display: flex;
     align-items: center;
@@ -133,8 +135,9 @@ div, form, input, table {
     border-radius: 50%;
     line-height: 1.53rem;
     background-color: whitesmoke;
-    /* text-align: center; */
-    padding-right: 0.3rem;
+    font-style: inherit;
+    text-align: center;
+    /* padding-right: 0.3rem; */
 
 }
 .sub_menu:hover + div{
@@ -190,13 +193,19 @@ div, form, input, table {
 .filterTableIcon {
 
 }
+.filterInput:hover {
+    background-color: rgb(255, 255, 255);
+}
 .filterReset {
     display: flex;
     justify-content: center;
     align-content: center;
     flex-direction: column;
+    font-size: 0.8rem;
     background-color: var(--btnBackground); 
     border-radius: var(--border-radius) !important;   
+    padding-left: 0.4rem;
+    padding-right:  0.4rem;
     /* border-top-left-radius: 0 !important;  
     border-bottom-left-radius: 0 !important; */
 

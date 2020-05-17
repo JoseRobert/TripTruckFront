@@ -44,8 +44,11 @@
                 <div class="form-row row" v-if="crud=='C'">
                     <div class="col-6 form-group">
                         <label for="password" class="formControlLabel">Password*</label>
-                        <input type="password" name='password' v-model="record.password" class="form-control form-control-sm" id="password" placeholder="Password"
+                        <div class='d-flex'>
+                            <input type="password" name='password' v-model="record.password" class="form-control form-control-sm" id="password" placeholder="Password"
                                 @input="input($event.target)" pattern="^[A-Za-z]{4,}[0-9]{1,4}$" required>
+                            <span class='icon_ctn' @click="see_pw($event.target, ['repassword','password'] )"><i class="far fa-eye"></i></span>
+                        </div>
                         <small id="passwordError" class="form-text text-muted">Minimun 5 characters. Must have at least one number at the end.</small>
                     </div>
                     <div class="col-6 form-group">
@@ -262,6 +265,9 @@ export default {
         see_pw: function(self, names){
             seePassword(self, names);
         },
+        see_clave: function(self, names){
+
+        },
         existUser: async function(user){
             console.log('existUser(): ', user)
             let url = 'http://localhost:3000/users/user';
@@ -308,3 +314,6 @@ export default {
 </script>
 
 <style scoped src="@/assets/css/form.css"></style>
+<style scoped>
+
+</style>

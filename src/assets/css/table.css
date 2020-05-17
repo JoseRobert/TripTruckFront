@@ -55,25 +55,25 @@ background-color: #DBE9E7;
     margin-left: var(--flecha);
     opacity: 0.66;
     opacity: 0.80;
-  }
-  .noarrow{
+}
+.noarrow{
     display: inline-block;
     vertical-align: middle;
     width: 0;
     height: 0;
     margin-left: var(--flecha);
     border: var(--flecha) solid transparent;
-  }
+}
   
-  .arrow.asc {
+.arrow.asc {
     border-left: var(--flecha) solid transparent;
     border-right: var(--flecha) solid transparent;
     border-bottom: var(--flecha) solid #fff;
-  }
-  
-  .arrow.dsc {
+}
+
+.arrow.dsc {
     border-left: var(--flecha) solid transparent;
     border-right: var(--flecha) solid transparent;
     border-top: var(--flecha) solid #fff;
-  }
+}
   /*  End */

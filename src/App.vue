@@ -18,17 +18,17 @@
                <div></div>
             </li>
             <li class="nav-item ">
-              <router-link class="nav-link icon_user" to="/login" v-if="User_Name == '' "><i class=" far fa-user"></i></router-link>
-              <router-link class="nav-link icon_user" to="/login" v-if="User_Name != '' "><i class="text-center">R</i></router-link>
+              <router-link class="nav-link icon_ctn" to="/login" v-if="User_Name == '' "><i class="far fa-user icon_user"></i></router-link>
+              <router-link class="nav-link icon_ctn" to="/login" v-if="User_Name != '' "><i class="icon_user">R</i></router-link>
             </li>
           </ul>
       </div>
     </nav> 
     <!-- Router view -->
     <transition name=''>
-    <div class="main">
-      <router-view/>
-    </div>
+      <div class="main">
+        <router-view/>
+      </div>
     </transition>
   </div>
 </template>

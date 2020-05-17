@@ -5,8 +5,9 @@
             <div class='col-12 titleProps'>Users</div> 
             <div class='col-12 d-flex align-items-center justify-content-between'>
                 <button class='btn btn-sm btn_1' @click="newUser"> New </button>
+                <!-- <search-table></search-table> -->
                 <div class="d-flex ">
-                    <input class="form-control filterTable" type="text" size="30" @keyup="searchTable($event, ['username', 'name', 'role'])" placeholder="Type something to search list items">
+                    <input v-model='stringSearch' class="form-control filterTable filterInput" type="text" size="30" @keyup="searchTable($event, ['username', 'name', 'role'])" placeholder="Type something to search list items">
                     <span class="filterTable filterReset">X</span>
                <!-- <i class="fas fa-search filterTableIcon"></i> -->
                 </div>
@@ -15,15 +16,17 @@
                 <thead class='rounded-top'>
                     <tr>
                         <th>#</th>
-                        <th @click="sortTable('username')">User Name<span :class="[(ascending)? 'asc': 'dsc', (sortField == 'username')? 'arrow': 'noarrow']"></span></th>
-                        <th @click="sortTable('fullname')">Full Name<span :class="[(ascending)? 'asc': 'dsc', (sortField == 'fullname')? 'arrow': 'noarrow']"></span></th>
-                        <th @click="sortTable('role')">Role<span :class="[(ascending)? 'asc': 'dsc', (sortField == 'role')? 'arrow': 'noarrow']"></span></th>
+                        <th @click="sortTable('username', $event)">User Name<span class='mio' :class="sortArrow"></span></th>
+                        <!-- <th @click="sortTable('username', $event)">User Name<span ref='idUser' :class="[(ascending)? 'asc': 'dsc', (sortField == 'username')? 'arrow': 'noarrow']" class='mio'></span></th> -->
+                        <th @click="sortTable('fullname', $event)">Full Name<span :class="[(ascending)? 'asc': 'dsc', (sortField == 'fullname')? 'arrow': 'noarrow']"></span></th>
+                          <th @click="sortTable('role', $event)">Role<span :class="sortArrow"></span></th>
+                        <!-- <th @click="sortTable('role')">Role<span :class="[(ascending)? 'asc': 'dsc', (sortField == 'role')? 'arrow': 'noarrow']"></span></th> -->
                         <th class='d-none d-md-table-cell' >Mobile<span></span></th>
                         <th class='text-center'>Actions</th>
                     </tr>
                 </thead>
                 <tbody id='bodyTable'>
-                    <tr class='' v-for="(user, index) in users" :key='index' @dblclick='readUser(index)' @mouseover='mouseover(index)'>
+                    <tr class='' v-for="(user, index) in listUsers" :key='index' @dblclick='readUser(index)' @mouseover='mouseover(index)'>
                         <td> {{ index+1 }} </td>
                         <td> {{ user.username }} </td>
                         <td> {{ user.fullname }} </td>
@@ -54,15 +57,27 @@ export default {
     name: 'Users',
     data() {
         return {
-            aUsers: [],
+            // aUsers: [],
+            stringSearch: '',
             ascending: false,
-            sortField: ''
+            sortField: '',
+            arrowDouble: false
+
         }
     },
     computed: {
         ...mapState(['users','crud','record']),
-        ...mapGetters(['getUsers'])
-
+        ...mapGetters(['getUsers']),
+        listUsers: function(){
+            return this.$store.state.users;
+        },
+        sortArrow: function(){
+            // return { asc: false, dsc: false, arrow: false, noarrow: false } 
+            let a = this.ascending;
+            let b = this.sortField;
+            return { noarrow: true };
+        }
+        // [(ascending)? 'asc': 'dsc', (sortField == 'role')? 'arrow': 'noarrow']
     },
     methods: {
         ...mapActions(['allUsers']),
@@ -130,27 +145,51 @@ export default {
             //     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             // });
         },
-        sortTable: function(field){
-            // console.log(`sortTable(${ field })`);
-            // console.log('field: ', field);
-            // return 0;
+        sortTable: function(field, self){
+            console.log(`sortTable(${ field }, ${self})`);
+            // console.dir(self.target);
+            //if( self ){
+            //  console.dir(self.target);
+            // this.arrowDouble = !this.arrowDouble;
+             let clase = self.target.children[0];
+            //  clase = document.getElementById('idUser');
+            //  console.dir(clase);
+            // console.log('ref', this.$refs.idUser.classList.add('eureka'));
+            // :class="[(ascending)? 'asc': 'dsc', (sortField == 'username')? 'arrow': 'noarrow']"
+             console.log('--------', clase.nodeName);
+              console.dir(clase); 
+
+            //}
             if( this.sortField == field ){
                 this.ascending = !this.ascending;
             }else{
-                this.ascending = true;
                 this.sortField = field;
+                this.ascending = true;
             }
             let ascending = this.ascending;
-            this.$store.state.users.sort(function(a, b){
+            // Add class SPAN
+            clase.classList.remove('arrow','noarrow');
+            if ( this.sortField == field) {
+                clase.classList.add('arrow');
+            }else{
+                 clase.classList.add('noarrow');
+            }
+            clase.classList.remove('asc','dsc');
+            if (this.ascending){
+                clase.classList.add('asc');
+            }else{
+                clase.classList.add('dsc');
+            }
+            console.log('---- sort -----');
+            this.listUsers.sort(function(a, b){
                 if( a[field] >= b[field] ){
                     return ascending ? 1 : -1
                 }else if( a[field] < b[field] ){
                     return ascending ? -1 : 1
                 }
                 return 0;
-            })
-            // 
-            
+            });
+
         },
         mouseover: function(index){
             // alert();
@@ -158,17 +197,19 @@ export default {
         }  
 
     },
-    created: function(context){
+    created: function(){
         // console.log('users.created()');
         this.$store.commit('setRecord', {});
         this.$store.dispatch('userAll');
+        // this.aUsers = this.$store.dispatch('userAll');
         // context.dispatch('allUsers');
     },
     mounted: function(){
         // console.log('users.mounted()');
         // swal2.fire({title: 'TITLE', text:'text'}); 
         // console.log(this.$store.getters.getUsers);
-        this.sortTable('username');
+        // this.sortTable('username', null);
+        //    console.log('idGenerator =>', idGenerator('2',3));
     },
     filters: {
         filtroTabla: function(self, aFields){

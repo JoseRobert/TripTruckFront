@@ -9,8 +9,9 @@ export function disabledForm(idForm, YesNo, ElementsForm){
         return null;
     }
     const objForm = document.getElementById(idForm).elements;
-    if( !objForm ){ console.log('Form (id='+idForm+'), not found.'); return false; };
-    if( objForm.nodeName !== 'FORM' ){ console.log('Id = '+idForm+', no es un FORM'); return false;}
+	if( !objForm ){ console.log('Form (Form ='+idForm+'), not found.'); return null; };
+	console.log(objForm);
+    // if( objForm.nodeName !== 'FORM' ){ console.log('Form = '+idForm+', no es un FORM'); return null;}
     // console.dir(objForm);
     if( !ElementsForm ){        // Todos los elementos del form
         for(let e=0; e < objForm.length ; e++){
@@ -31,11 +32,18 @@ export function idGenerator(Id, lenghtId){
 	let len = 0;
 	let value = 0;
 	let newId = '';
-	if( !is_string(Id) || !Id) { console.log(sintaxis+' => Id'); return ''; }
-	if( lenghtId && !is_number(lenghtId)) { console.log(sintaxis+' => lenghtId'); return ''; }
+	console.log('---------');
+	console.log('Id = ', Id, 'string:', is_string(Id) );
+
+	console.log('lenghtId', lenghtId, 'number:', typeof(lenghtId));
+
+	if( !is_string(Id) || !Id ) { console.log(sintaxis+' => Id'); return ''; }
+
+	if( lenghtId && !is_number(lenghtId) ) { console.log(sintaxis+' => lenghtId'); return ''; }
 	len = Id.trim().length;
+	console.log('1. len = ', len);
 	len = ( len == 0 && !lenghtId )? 1: lenghtId;
-	
+	console.log('2. len = ', len);
 	value = parseInt(Id, 10)+1;
 	newId = '0'.repeat(len)+value.toString()
 	newId = newId.substr(len*-1);

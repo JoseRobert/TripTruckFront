@@ -64,7 +64,9 @@ export default new Vuex.Store({
       try {
         let data = await fetch('http://localhost:3000/users/all/');
         let users = await data.json();
-        commit('setUsers', users);        
+        commit('setUsers', users);   
+        // console.log(users);
+        // return users;   
       } catch (error) {
         console.log(error);          
       }
